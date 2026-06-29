@@ -1,0 +1,645 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <meta name="design_doc_mode" content="canvas">
+  <link rel="stylesheet" href="_ds/go1-design-system-fc2f369b-9b59-4b6a-843d-3b447cf9f198/tokens/colors.css">
+  <link rel="stylesheet" href="_ds/go1-design-system-fc2f369b-9b59-4b6a-843d-3b447cf9f198/tokens/typography.css">
+  <link rel="stylesheet" href="_ds/go1-design-system-fc2f369b-9b59-4b6a-843d-3b447cf9f198/tokens/spacing.css">
+  <link rel="stylesheet" href="_ds/go1-design-system-fc2f369b-9b59-4b6a-843d-3b447cf9f198/tokens/effects.css">
+  <link rel="stylesheet" href="_ds/go1-design-system-fc2f369b-9b59-4b6a-843d-3b447cf9f198/tokens/base.css">
+  <script src="_ds/go1-design-system-fc2f369b-9b59-4b6a-843d-3b447cf9f198/_ds_bundle.js"></script>
+  <style>
+    @keyframes pkPulse { 0%,100%{opacity:1} 50%{opacity:0.25} }
+  </style>
+</helmet>
+
+<!-- ── SECTION LABEL: Compact Mode ──────────────────────────────────── -->
+<div style="position:absolute;left:80px;top:46px;font:600 11px/1 -apple-system,'Helvetica Neue',sans-serif;color:rgba(180,165,240,0.45);letter-spacing:1.8px;text-transform:uppercase;">Compact Mode</div>
+
+<!-- ═══════════════════════════════════════════════════════════════════
+     COMPACT A — Structured · Refined existing layout
+     ═══════════════════════════════════════════════════════════════════ -->
+<div style="position:absolute;left:80px;top:82px;width:480px;">
+  <div data-drags-parent="1" style="position:absolute;top:-22px;font:500 11px/1 -apple-system,sans-serif;color:rgba(180,165,240,0.52);">A — Structured</div>
+
+  <div data-screen-label="Compact A" style="background:#121024;border-radius:12px;box-shadow:0 24px 80px rgba(0,0,0,0.8),0 0 0 1px rgba(91,60,196,0.22);overflow:hidden;">
+
+    <!-- traffic lights -->
+    <div style="display:flex;gap:7px;padding:12px 16px 8px;align-items:center;">
+      <div style="width:12px;height:12px;border-radius:50%;background:#FF5F56;"></div>
+      <div style="width:12px;height:12px;border-radius:50%;background:#FFBD2E;"></div>
+      <div style="width:12px;height:12px;border-radius:50%;background:#27C93F;"></div>
+    </div>
+
+    <!-- app header -->
+    <div style="padding:2px 16px 12px;display:flex;align-items:flex-end;justify-content:space-between;border-bottom:1px solid rgba(91,60,196,0.14);">
+      <div>
+        <div style="font:700 19px/1 -apple-system,sans-serif;color:#ECE5F7;letter-spacing:-0.4px;">ProcessKill</div>
+        <div style="font:400 11px/1 -apple-system,sans-serif;color:#5A5272;margin-top:4px;">Local port control</div>
+      </div>
+      <div style="background:rgba(91,60,196,0.12);border:1px solid rgba(91,60,196,0.22);border-radius:6px;padding:6px 10px;cursor:pointer;font:400 13px/1 -apple-system,sans-serif;color:#9790B2;">↺</div>
+    </div>
+
+    <!-- PROJECTS -->
+    <div style="margin:10px 10px 8px;background:#181330;border-radius:8px;padding:10px 12px;">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;">
+        <span style="font:600 10px/1 -apple-system,sans-serif;color:#5A5272;letter-spacing:1.1px;text-transform:uppercase;">Projects</span>
+        <div style="display:flex;gap:4px;">
+          <div style="background:rgba(91,60,196,0.12);border:1px solid rgba(91,60,196,0.20);border-radius:4px;width:22px;height:22px;display:flex;align-items:center;justify-content:center;cursor:pointer;color:#9790B2;font:400 14px/1 -apple-system,sans-serif;">+</div>
+          <div style="background:rgba(91,60,196,0.12);border:1px solid rgba(91,60,196,0.20);border-radius:4px;width:22px;height:22px;display:flex;align-items:center;justify-content:center;cursor:pointer;color:#9790B2;font:400 12px/1 -apple-system,sans-serif;">↺</div>
+          <div style="background:rgba(91,60,196,0.12);border:1px solid rgba(91,60,196,0.20);border-radius:4px;width:22px;height:22px;display:flex;align-items:center;justify-content:center;cursor:pointer;color:#9790B2;font:400 14px/1 -apple-system,sans-serif;">−</div>
+        </div>
+      </div>
+      <div style="font:400 10px/1 'SF Mono',ui-monospace,'Courier New',monospace;color:#5A5272;margin-bottom:8px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">/Users/carlosbastida/Repos/Capybara/c…</div>
+      <div style="display:flex;gap:6px;align-items:center;overflow:hidden;">
+        <div style="background:#5EDFD0;border-radius:7px;padding:6px 10px;display:flex;align-items:center;gap:5px;cursor:pointer;flex-shrink:0;">
+          <span style="font:500 10px/1 -apple-system,sans-serif;color:#0A0818;">▶</span>
+          <span style="font:700 12px/1 -apple-system,sans-serif;color:#0A0818;">capibara_app</span>
+          <span style="font:600 9px/1 -apple-system,sans-serif;color:rgba(10,8,24,0.6);background:rgba(10,8,24,0.12);border-radius:3px;padding:2px 5px;text-transform:uppercase;letter-spacing:0.3px;">Flutter</span>
+        </div>
+        <div style="background:#1F1B3C;border:1px solid rgba(91,60,196,0.20);border-radius:7px;padding:6px 10px;display:flex;align-items:center;gap:5px;cursor:pointer;flex-shrink:0;">
+          <span style="font:500 11px/1 'SF Mono',monospace;color:#9790B2;">{}</span>
+          <span style="font:400 12px/1 -apple-system,sans-serif;color:#9790B2;">wolves-den-bjj</span>
+          <span style="font:600 9px/1 -apple-system,sans-serif;color:#7A5CF0;background:rgba(122,92,240,0.12);border-radius:3px;padding:2px 5px;text-transform:uppercase;letter-spacing:0.3px;">Node</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- command chips -->
+    <div style="margin:0 10px 8px;display:flex;gap:5px;flex-wrap:wrap;">
+      <div style="background:#1F1B3C;border:1px solid rgba(91,60,196,0.18);border-radius:5px;padding:5px 9px;cursor:pointer;font:400 11px/1 'SF Mono',ui-monospace,'Courier New',monospace;color:#9790B2;">pub get</div>
+      <div style="background:#292147;border:1px solid #5EDFD0;border-radius:5px;padding:5px 9px;cursor:pointer;font:400 11px/1 'SF Mono',ui-monospace,'Courier New',monospace;color:#5EDFD0;">run</div>
+      <div style="background:#1F1B3C;border:1px solid rgba(91,60,196,0.18);border-radius:5px;padding:5px 9px;cursor:pointer;font:400 11px/1 'SF Mono',ui-monospace,'Courier New',monospace;color:#9790B2;">test</div>
+      <div style="background:#1F1B3C;border:1px solid rgba(91,60,196,0.18);border-radius:5px;padding:5px 9px;cursor:pointer;font:400 11px/1 'SF Mono',ui-monospace,'Courier New',monospace;color:#9790B2;">build macOS</div>
+      <div style="background:#1F1B3C;border:1px solid rgba(91,60,196,0.18);border-radius:5px;padding:5px 9px;cursor:pointer;font:400 11px/1 'SF Mono',ui-monospace,'Courier New',monospace;color:#9790B2;">clean</div>
+    </div>
+
+    <!-- runner -->
+    <div style="margin:0 10px;background:#181330;border-radius:8px;padding:12px;">
+      <div style="margin-bottom:10px;">
+        <div style="font:600 10px/1 -apple-system,sans-serif;color:#5A5272;letter-spacing:1px;text-transform:uppercase;margin-bottom:5px;">Port</div>
+        <div style="display:flex;gap:6px;">
+          <div style="flex:1;background:#1F1B3C;border:1px solid rgba(91,60,196,0.25);border-radius:6px;padding:8px 10px;font:500 14px/1 'SF Mono',ui-monospace,'Courier New',monospace;color:#00B4DA;">3000</div>
+          <div style="background:#00B4DA;border-radius:6px;padding:8px 16px;font:700 12px/1 -apple-system,sans-serif;color:#0A0818;cursor:pointer;display:flex;align-items:center;">Scan</div>
+        </div>
+      </div>
+      <div style="margin-bottom:10px;">
+        <div style="font:600 10px/1 -apple-system,sans-serif;color:#5A5272;letter-spacing:1px;text-transform:uppercase;margin-bottom:5px;">Start Command</div>
+        <div style="background:#1F1B3C;border:1px solid rgba(91,60,196,0.25);border-radius:6px;padding:8px 10px;font:400 12px/1 'SF Mono',ui-monospace,'Courier New',monospace;color:#ECE5F7;">flutter run</div>
+      </div>
+      <div style="margin-bottom:12px;">
+        <div style="font:600 10px/1 -apple-system,sans-serif;color:#5A5272;letter-spacing:1px;text-transform:uppercase;margin-bottom:5px;">Working Directory</div>
+        <div style="background:#1F1B3C;border:1px solid rgba(91,60,196,0.25);border-radius:6px;padding:8px 10px;font:400 11px/1 'SF Mono',ui-monospace,'Courier New',monospace;color:#9790B2;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">/Users/carlosbastida/Repos/capibara_app</div>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px;">
+        <div style="background:#5EDFD0;border-radius:6px;padding:9px;font:700 12px/1 -apple-system,sans-serif;color:#0A0818;cursor:pointer;text-align:center;">Start</div>
+        <div style="background:#FF7043;border-radius:6px;padding:9px;font:700 12px/1 -apple-system,sans-serif;color:#fff;cursor:pointer;text-align:center;">Restart</div>
+        <div style="background:#E53834;border-radius:6px;padding:9px;font:700 12px/1 -apple-system,sans-serif;color:#fff;cursor:pointer;text-align:center;">Stop</div>
+      </div>
+    </div>
+
+    <!-- status strip -->
+    <div style="margin:8px 10px;background:#181330;border-radius:6px;padding:8px 12px;display:flex;align-items:center;gap:8px;">
+      <div style="width:7px;height:7px;border-radius:50%;background:#5A5272;flex-shrink:0;"></div>
+      <div style="font:400 11px/1 -apple-system,sans-serif;color:#9790B2;">Port 3000 is free.</div>
+    </div>
+
+    <!-- listening process -->
+    <div style="margin:0 10px 10px;background:#181330;border-radius:8px;padding:10px 12px;">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
+        <span style="font:600 10px/1 -apple-system,sans-serif;color:#5A5272;letter-spacing:1.1px;text-transform:uppercase;">Listening Process</span>
+        <span style="background:rgba(122,92,240,0.14);border-radius:999px;padding:2px 8px;font:700 10px/1.5 -apple-system,sans-serif;color:#7A5CF0;">0</span>
+      </div>
+      <div style="border:1px dashed rgba(91,60,196,0.20);border-radius:6px;padding:18px;text-align:center;">
+        <div style="font:400 11px/1.5 -apple-system,sans-serif;color:#5A5272;">Nothing is listening on port 3000.</div>
+      </div>
+    </div>
+
+    <!-- footer -->
+    <div style="border-top:1px solid rgba(91,60,196,0.12);padding:10px 16px;text-align:center;">
+      <div style="font:500 12px/1 -apple-system,sans-serif;color:#00B4DA;cursor:pointer;">↗ Open localhost</div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════════════
+     COMPACT B — Command-First · Raycast-inspired
+     ═══════════════════════════════════════════════════════════════════ -->
+<div style="position:absolute;left:640px;top:82px;width:480px;">
+  <div data-drags-parent="1" style="position:absolute;top:-22px;font:500 11px/1 -apple-system,sans-serif;color:rgba(180,165,240,0.52);">B — Command-First</div>
+
+  <div data-screen-label="Compact B" style="background:#0A0818;border-radius:12px;box-shadow:0 24px 80px rgba(0,0,0,0.88),0 0 0 1px rgba(91,60,196,0.28);overflow:hidden;">
+
+    <!-- traffic lights -->
+    <div style="display:flex;gap:7px;padding:12px 16px 8px;">
+      <div style="width:12px;height:12px;border-radius:50%;background:#FF5F56;"></div>
+      <div style="width:12px;height:12px;border-radius:50%;background:#FFBD2E;"></div>
+      <div style="width:12px;height:12px;border-radius:50%;background:#27C93F;"></div>
+    </div>
+
+    <!-- project selector bar -->
+    <div style="margin:4px 12px 0;background:#181330;border:1px solid rgba(91,60,196,0.22);border-radius:8px;padding:8px 12px;display:flex;align-items:center;justify-content:space-between;cursor:pointer;">
+      <div style="display:flex;align-items:center;gap:8px;">
+        <div style="width:7px;height:7px;border-radius:50%;background:#28BF7D;flex-shrink:0;animation:pkPulse 2s ease-in-out infinite;"></div>
+        <span style="font:700 13px/1 -apple-system,sans-serif;color:#ECE5F7;">capibara_app</span>
+        <span style="background:rgba(94,223,208,0.12);border:1px solid rgba(94,223,208,0.28);border-radius:3px;padding:2px 6px;font:600 9px/1 -apple-system,sans-serif;color:#5EDFD0;text-transform:uppercase;letter-spacing:0.5px;">Flutter</span>
+      </div>
+      <div style="display:flex;align-items:center;gap:8px;">
+        <span style="font:500 12px/1 'SF Mono',ui-monospace,'Courier New',monospace;color:#00B4DA;">:3000</span>
+        <span style="color:#5A5272;font:400 11px/1 -apple-system,sans-serif;">▾</span>
+      </div>
+    </div>
+
+    <!-- hero command input -->
+    <div style="margin:8px 12px 0;background:#181330;border:1px solid rgba(0,180,218,0.40);border-radius:8px;padding:10px 12px;display:flex;align-items:center;gap:8px;">
+      <span style="font:400 15px/1 -apple-system,sans-serif;color:#5A5272;flex-shrink:0;">⌕</span>
+      <span style="font:400 13px/1 'SF Mono',ui-monospace,'Courier New',monospace;color:#ECE5F7;flex:1;">flutter run</span>
+      <span style="background:rgba(91,60,196,0.14);border-radius:3px;padding:2px 7px;font:600 9px/1 -apple-system,sans-serif;color:#5A5272;letter-spacing:0.3px;flex-shrink:0;">↵ run</span>
+    </div>
+
+    <!-- command list -->
+    <div style="margin:6px 12px;border-radius:8px;overflow:hidden;border:1px solid rgba(91,60,196,0.16);">
+
+      <!-- selected command -->
+      <div style="background:#1F1B3C;border-left:2px solid #5EDFD0;padding:8px 12px 8px 10px;display:flex;align-items:center;justify-content:space-between;cursor:pointer;">
+        <div style="display:flex;align-items:center;gap:9px;">
+          <span style="font:400 10px/1 -apple-system,sans-serif;color:#5EDFD0;flex-shrink:0;">▶</span>
+          <div>
+            <div style="font:600 12px/1 -apple-system,sans-serif;color:#ECE5F7;">run</div>
+            <div style="font:400 10px/1.4 'SF Mono',ui-monospace,'Courier New',monospace;color:#5EDFD0;margin-top:3px;">flutter run</div>
+          </div>
+        </div>
+        <span style="background:rgba(91,60,196,0.14);border-radius:3px;padding:2px 7px;font:600 10px/1 -apple-system,sans-serif;color:#5A5272;flex-shrink:0;">⏎</span>
+      </div>
+
+      <div style="background:#121024;padding:7px 12px 7px 23px;cursor:pointer;border-top:1px solid rgba(91,60,196,0.10);">
+        <div style="font:400 12px/1 -apple-system,sans-serif;color:#9790B2;">pub get</div>
+        <div style="font:400 10px/1.4 'SF Mono',ui-monospace,'Courier New',monospace;color:#5A5272;margin-top:3px;">flutter pub get</div>
+      </div>
+      <div style="background:#121024;padding:7px 12px 7px 23px;cursor:pointer;border-top:1px solid rgba(91,60,196,0.10);">
+        <div style="font:400 12px/1 -apple-system,sans-serif;color:#9790B2;">test</div>
+        <div style="font:400 10px/1.4 'SF Mono',ui-monospace,'Courier New',monospace;color:#5A5272;margin-top:3px;">flutter test</div>
+      </div>
+      <div style="background:#121024;padding:7px 12px 7px 23px;cursor:pointer;border-top:1px solid rgba(91,60,196,0.10);">
+        <div style="font:400 12px/1 -apple-system,sans-serif;color:#9790B2;">build macOS</div>
+        <div style="font:400 10px/1.4 'SF Mono',ui-monospace,'Courier New',monospace;color:#5A5272;margin-top:3px;">flutter build macos</div>
+      </div>
+      <div style="background:#121024;padding:7px 12px 7px 23px;cursor:pointer;border-top:1px solid rgba(91,60,196,0.10);">
+        <div style="font:400 12px/1 -apple-system,sans-serif;color:#9790B2;">clean</div>
+        <div style="font:400 10px/1.4 'SF Mono',ui-monospace,'Courier New',monospace;color:#5A5272;margin-top:3px;">flutter clean</div>
+      </div>
+
+    </div>
+
+    <!-- working dir -->
+    <div style="margin:6px 12px;background:#181330;border-radius:6px;padding:7px 12px;display:flex;align-items:center;gap:8px;overflow:hidden;">
+      <span style="font:600 9px/1 -apple-system,sans-serif;color:#5A5272;letter-spacing:1px;text-transform:uppercase;flex-shrink:0;">Dir</span>
+      <span style="font:400 10px/1 'SF Mono',ui-monospace,'Courier New',monospace;color:#9790B2;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">/Users/carlosbastida/Repos/capibara_app</span>
+    </div>
+
+    <!-- actions — Stop is in confirm state -->
+    <div style="margin:6px 12px 10px;display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px;">
+      <div style="background:#5EDFD0;border-radius:6px;padding:10px;font:700 12px/1 -apple-system,sans-serif;color:#0A0818;cursor:pointer;text-align:center;display:flex;align-items:center;justify-content:center;gap:4px;">
+        <span style="font-size:9px;">▶</span> Start
+      </div>
+      <div style="background:#FF7043;border-radius:6px;padding:10px;font:700 12px/1 -apple-system,sans-serif;color:#fff;cursor:pointer;text-align:center;">Restart</div>
+      <div style="background:#E53834;border-radius:6px;padding:10px;font:700 11px/1.1 -apple-system,sans-serif;color:#fff;cursor:pointer;text-align:center;">Confirm?</div>
+    </div>
+
+    <!-- status bar -->
+    <div style="border-top:1px solid rgba(91,60,196,0.14);padding:9px 16px;display:flex;align-items:center;justify-content:space-between;">
+      <div style="display:flex;align-items:center;gap:7px;">
+        <div style="width:6px;height:6px;border-radius:50%;background:#5A5272;"></div>
+        <span style="font:400 11px/1 -apple-system,sans-serif;color:#9790B2;">Port 3000 is free.</span>
+      </div>
+      <span style="font:500 11px/1 -apple-system,sans-serif;color:#00B4DA;cursor:pointer;">↗ localhost</span>
+    </div>
+
+  </div>
+</div>
+
+<!-- annotation: stop confirm state -->
+<div style="position:absolute;left:1160px;top:700px;width:130px;background:rgba(229,56,52,0.08);border:1px solid rgba(229,56,52,0.28);border-radius:7px;padding:9px 10px;transform:rotate(1deg);">
+  <div style="font:600 9px/1 -apple-system,sans-serif;color:#E53834;text-transform:uppercase;letter-spacing:0.8px;margin-bottom:5px;">Interaction note</div>
+  <div style="font:400 10px/1.45 -apple-system,sans-serif;color:rgba(229,100,90,0.9);">Stop shows "Confirm?" on first tap. Reverts after 3 s if not confirmed.</div>
+</div>
+
+<!-- ── SECTION LABEL: Dashboard Mode ──────────────────────────────── -->
+<div style="position:absolute;left:80px;top:990px;font:600 11px/1 -apple-system,sans-serif;color:rgba(180,165,240,0.45);letter-spacing:1.8px;text-transform:uppercase;">Dashboard Mode</div>
+
+<!-- ═══════════════════════════════════════════════════════════════════
+     DASHBOARD A — Top Bar + Sidebar + Main
+     ═══════════════════════════════════════════════════════════════════ -->
+<div style="position:absolute;left:80px;top:1026px;width:1280px;">
+  <div data-drags-parent="1" style="position:absolute;top:-22px;font:500 11px/1 -apple-system,sans-serif;color:rgba(180,165,240,0.52);">Dashboard A — Top Bar + Sidebar + Main</div>
+
+  <div data-screen-label="Dashboard A" style="background:#121024;border-radius:12px;box-shadow:0 24px 80px rgba(0,0,0,0.75),0 0 0 1px rgba(91,60,196,0.22);overflow:hidden;height:780px;display:flex;flex-direction:column;">
+
+    <!-- title bar -->
+    <div style="background:#0A0818;border-bottom:1px solid rgba(91,60,196,0.14);padding:0 16px;height:44px;display:flex;align-items:center;gap:12px;flex-shrink:0;">
+      <div style="display:flex;gap:7px;flex-shrink:0;">
+        <div style="width:12px;height:12px;border-radius:50%;background:#FF5F56;"></div>
+        <div style="width:12px;height:12px;border-radius:50%;background:#FFBD2E;"></div>
+        <div style="width:12px;height:12px;border-radius:50%;background:#27C93F;"></div>
+      </div>
+      <span style="font:700 13px/1 -apple-system,sans-serif;color:#ECE5F7;flex-shrink:0;letter-spacing:-0.2px;">ProcessKill</span>
+      <div style="width:1px;height:14px;background:rgba(91,60,196,0.25);flex-shrink:0;"></div>
+      <div style="display:flex;gap:6px;align-items:center;flex:1;overflow:hidden;">
+        <div style="background:#181330;border:1px solid rgba(94,223,208,0.28);border-radius:6px;padding:4px 10px;display:flex;align-items:center;gap:6px;flex-shrink:0;">
+          <div style="width:6px;height:6px;border-radius:50%;background:#28BF7D;animation:pkPulse 2s ease-in-out infinite;flex-shrink:0;"></div>
+          <span style="font:500 11px/1 -apple-system,sans-serif;color:#ECE5F7;">npm run dev</span>
+          <span style="font:500 11px/1 'SF Mono',ui-monospace,'Courier New',monospace;color:#00B4DA;">:3000</span>
+          <span style="font:400 10px/1 -apple-system,sans-serif;color:#9790B2;">12847</span>
+          <div style="display:flex;gap:3px;">
+            <div style="background:rgba(0,180,218,0.10);border-radius:3px;padding:2px 5px;font:600 9px/1 -apple-system,sans-serif;color:#00B4DA;cursor:pointer;">↺</div>
+            <div style="background:rgba(229,56,52,0.10);border-radius:3px;padding:2px 5px;font:600 9px/1 -apple-system,sans-serif;color:#E53834;cursor:pointer;">■</div>
+          </div>
+        </div>
+        <div style="background:#181330;border:1px solid rgba(91,60,196,0.18);border-radius:6px;padding:4px 10px;display:flex;align-items:center;gap:6px;flex-shrink:0;">
+          <div style="width:6px;height:6px;border-radius:50%;background:#28BF7D;animation:pkPulse 2s ease-in-out infinite;flex-shrink:0;"></div>
+          <span style="font:500 11px/1 -apple-system,sans-serif;color:#9790B2;">flutter run</span>
+          <span style="font:500 11px/1 'SF Mono',ui-monospace,'Courier New',monospace;color:#5A5272;">:5173</span>
+          <div style="display:flex;gap:3px;">
+            <div style="background:rgba(91,60,196,0.08);border-radius:3px;padding:2px 5px;font:600 9px/1 -apple-system,sans-serif;color:#9790B2;cursor:pointer;">↺</div>
+            <div style="background:rgba(91,60,196,0.08);border-radius:3px;padding:2px 5px;font:600 9px/1 -apple-system,sans-serif;color:#9790B2;cursor:pointer;">■</div>
+          </div>
+        </div>
+        <div style="background:rgba(0,180,218,0.08);border:1px solid rgba(0,180,218,0.22);border-radius:6px;padding:4px 10px;font:600 11px/1 -apple-system,sans-serif;color:#00B4DA;cursor:pointer;flex-shrink:0;">+ Scan Ports</div>
+      </div>
+    </div>
+
+    <!-- body -->
+    <div style="display:flex;flex:1;overflow:hidden;">
+
+      <!-- sidebar -->
+      <div style="width:220px;background:#0D0A1C;border-right:1px solid rgba(91,60,196,0.12);display:flex;flex-direction:column;flex-shrink:0;">
+        <div style="padding:12px;border-bottom:1px solid rgba(91,60,196,0.10);">
+          <div style="font:600 10px/1 -apple-system,sans-serif;color:#5A5272;letter-spacing:1.1px;text-transform:uppercase;margin-bottom:8px;">Projects</div>
+          <div style="background:#181330;border:1px solid rgba(91,60,196,0.18);border-radius:6px;padding:6px 10px;display:flex;align-items:center;gap:6px;">
+            <span style="font:400 13px/1 -apple-system,sans-serif;color:#5A5272;">⌕</span>
+            <span style="font:400 11px/1 -apple-system,sans-serif;color:#5A5272;">Filter…</span>
+          </div>
+        </div>
+
+        <div style="flex:1;padding:6px;overflow:hidden;">
+
+          <div style="background:#1F1B3C;border:1px solid rgba(91,60,196,0.32);border-radius:7px;padding:9px 10px;margin-bottom:4px;cursor:pointer;">
+            <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:5px;">
+              <span style="font:700 12px/1 -apple-system,sans-serif;color:#ECE5F7;">capibara_app</span>
+              <div style="display:flex;align-items:center;gap:4px;">
+                <div style="width:5px;height:5px;border-radius:50%;background:#28BF7D;"></div>
+                <span style="font:500 9px/1 'SF Mono',ui-monospace,'Courier New',monospace;color:#28BF7D;">:5173</span>
+              </div>
+            </div>
+            <span style="background:rgba(94,223,208,0.12);border:1px solid rgba(94,223,208,0.22);border-radius:3px;padding:1px 5px;font:600 9px/1 -apple-system,sans-serif;color:#5EDFD0;text-transform:uppercase;letter-spacing:0.4px;">Flutter</span>
+            <div style="font:400 9px/1.3 'SF Mono',ui-monospace,'Courier New',monospace;color:#5A5272;margin-top:5px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">/Users/cbastida/Repos/capibara_app</div>
+          </div>
+
+          <div style="background:#181330;border:1px solid rgba(91,60,196,0.12);border-radius:7px;padding:9px 10px;margin-bottom:4px;cursor:pointer;">
+            <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:5px;">
+              <span style="font:600 12px/1 -apple-system,sans-serif;color:#9790B2;">wolves-den-bjj</span>
+              <div style="display:flex;align-items:center;gap:4px;">
+                <div style="width:5px;height:5px;border-radius:50%;background:#28BF7D;"></div>
+                <span style="font:500 9px/1 'SF Mono',ui-monospace,'Courier New',monospace;color:#28BF7D;">:3000</span>
+              </div>
+            </div>
+            <span style="background:rgba(122,92,240,0.12);border:1px solid rgba(122,92,240,0.22);border-radius:3px;padding:1px 5px;font:600 9px/1 -apple-system,sans-serif;color:#7A5CF0;text-transform:uppercase;letter-spacing:0.4px;">Node</span>
+            <div style="font:400 9px/1.3 'SF Mono',ui-monospace,'Courier New',monospace;color:#5A5272;margin-top:5px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">/Users/cbastida/Repos/wolves-den-bjj</div>
+          </div>
+
+          <div style="background:#181330;border:1px solid rgba(91,60,196,0.12);border-radius:7px;padding:9px 10px;cursor:pointer;">
+            <div style="margin-bottom:5px;"><span style="font:600 12px/1 -apple-system,sans-serif;color:#9790B2;">tabor-api</span></div>
+            <span style="background:rgba(0,180,218,0.10);border:1px solid rgba(0,180,218,0.20);border-radius:3px;padding:1px 5px;font:600 9px/1 -apple-system,sans-serif;color:#00B4DA;text-transform:uppercase;letter-spacing:0.4px;">.NET</span>
+            <div style="font:400 9px/1.3 'SF Mono',ui-monospace,'Courier New',monospace;color:#5A5272;margin-top:5px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">/Users/cbastida/Repos/tabor-api</div>
+          </div>
+
+        </div>
+
+        <div style="padding:8px;border-top:1px solid rgba(91,60,196,0.10);display:flex;gap:5px;">
+          <div style="flex:1;background:rgba(91,60,196,0.10);border:1px solid rgba(91,60,196,0.20);border-radius:5px;padding:6px;font:600 10px/1 -apple-system,sans-serif;color:#9790B2;cursor:pointer;text-align:center;">+ Add</div>
+          <div style="background:rgba(91,60,196,0.10);border:1px solid rgba(91,60,196,0.20);border-radius:5px;padding:6px 8px;font:500 11px/1 -apple-system,sans-serif;color:#9790B2;cursor:pointer;">↺</div>
+          <div style="background:rgba(229,56,52,0.08);border:1px solid rgba(229,56,52,0.18);border-radius:5px;padding:6px 8px;font:500 11px/1 -apple-system,sans-serif;color:#E53834;cursor:pointer;">−</div>
+        </div>
+      </div>
+
+      <!-- main area -->
+      <div style="flex:1;padding:16px;overflow-y:auto;display:flex;flex-direction:column;gap:12px;">
+
+        <div style="display:flex;align-items:flex-start;justify-content:space-between;">
+          <div>
+            <div style="display:flex;align-items:center;gap:8px;margin-bottom:5px;">
+              <span style="font:700 20px/1 -apple-system,sans-serif;color:#ECE5F7;letter-spacing:-0.4px;">capibara_app</span>
+              <span style="background:rgba(94,223,208,0.12);border:1px solid rgba(94,223,208,0.28);border-radius:4px;padding:3px 7px;font:600 10px/1 -apple-system,sans-serif;color:#5EDFD0;text-transform:uppercase;letter-spacing:0.5px;">Flutter</span>
+            </div>
+            <div style="font:400 11px/1 'SF Mono',ui-monospace,'Courier New',monospace;color:#5A5272;">/Users/carlosbastida/Repos/capibara_app</div>
+          </div>
+          <div style="display:flex;gap:6px;flex-shrink:0;margin-top:2px;">
+            <div style="background:rgba(91,60,196,0.10);border:1px solid rgba(91,60,196,0.20);border-radius:6px;padding:6px 10px;font:600 11px/1 -apple-system,sans-serif;color:#9790B2;cursor:pointer;">↗ Folder</div>
+            <div style="background:rgba(91,60,196,0.10);border:1px solid rgba(91,60,196,0.20);border-radius:6px;padding:6px 10px;font:600 11px/1 -apple-system,sans-serif;color:#9790B2;cursor:pointer;">↺ Refresh</div>
+          </div>
+        </div>
+
+        <div style="background:#181330;border-radius:8px;padding:12px;">
+          <div style="font:600 10px/1 -apple-system,sans-serif;color:#5A5272;letter-spacing:1.1px;text-transform:uppercase;margin-bottom:9px;">Command Library</div>
+          <div style="display:flex;gap:5px;flex-wrap:wrap;">
+            <div style="background:#1F1B3C;border:1px solid rgba(91,60,196,0.18);border-radius:5px;padding:5px 9px;cursor:pointer;font:400 11px/1 'SF Mono',ui-monospace,'Courier New',monospace;color:#9790B2;">pub get</div>
+            <div style="background:#292147;border:1px solid #5EDFD0;border-radius:5px;padding:5px 9px;cursor:pointer;font:400 11px/1 'SF Mono',ui-monospace,'Courier New',monospace;color:#5EDFD0;">run</div>
+            <div style="background:#1F1B3C;border:1px solid rgba(91,60,196,0.18);border-radius:5px;padding:5px 9px;cursor:pointer;font:400 11px/1 'SF Mono',ui-monospace,'Courier New',monospace;color:#9790B2;">test</div>
+            <div style="background:#1F1B3C;border:1px solid rgba(91,60,196,0.18);border-radius:5px;padding:5px 9px;cursor:pointer;font:400 11px/1 'SF Mono',ui-monospace,'Courier New',monospace;color:#9790B2;">build macOS</div>
+            <div style="background:#1F1B3C;border:1px solid rgba(91,60,196,0.18);border-radius:5px;padding:5px 9px;cursor:pointer;font:400 11px/1 'SF Mono',ui-monospace,'Courier New',monospace;color:#9790B2;">clean</div>
+            <div style="background:rgba(122,92,240,0.06);border:1px dashed rgba(122,92,240,0.22);border-radius:5px;padding:5px 9px;cursor:pointer;font:400 11px/1 -apple-system,sans-serif;color:#7A5CF0;">+ Custom</div>
+          </div>
+        </div>
+
+        <div style="background:#181330;border-radius:8px;padding:12px;">
+          <div style="font:600 10px/1 -apple-system,sans-serif;color:#5A5272;letter-spacing:1.1px;text-transform:uppercase;margin-bottom:10px;">Runner</div>
+          <div style="display:grid;grid-template-columns:1fr 90px;gap:8px;margin-bottom:8px;">
+            <div>
+              <div style="font:600 9px/1 -apple-system,sans-serif;color:#5A5272;letter-spacing:0.8px;text-transform:uppercase;margin-bottom:5px;">Command</div>
+              <div style="background:#1F1B3C;border:1px solid rgba(0,180,218,0.35);border-radius:6px;padding:8px 10px;font:400 12px/1 'SF Mono',ui-monospace,'Courier New',monospace;color:#ECE5F7;">flutter run</div>
+            </div>
+            <div>
+              <div style="font:600 9px/1 -apple-system,sans-serif;color:#5A5272;letter-spacing:0.8px;text-transform:uppercase;margin-bottom:5px;">Port</div>
+              <div style="background:#1F1B3C;border:1px solid rgba(91,60,196,0.25);border-radius:6px;padding:8px 10px;font:500 12px/1 'SF Mono',ui-monospace,'Courier New',monospace;color:#00B4DA;">5173</div>
+            </div>
+          </div>
+          <div style="margin-bottom:10px;">
+            <div style="font:600 9px/1 -apple-system,sans-serif;color:#5A5272;letter-spacing:0.8px;text-transform:uppercase;margin-bottom:5px;">Working Directory</div>
+            <div style="background:#1F1B3C;border:1px solid rgba(91,60,196,0.25);border-radius:6px;padding:8px 10px;font:400 11px/1 'SF Mono',ui-monospace,'Courier New',monospace;color:#9790B2;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">/Users/carlosbastida/Repos/capibara_app</div>
+          </div>
+          <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px;">
+            <div style="background:#5EDFD0;border-radius:6px;padding:9px;font:700 12px/1 -apple-system,sans-serif;color:#0A0818;cursor:pointer;text-align:center;">Start</div>
+            <div style="background:#FF7043;border-radius:6px;padding:9px;font:700 12px/1 -apple-system,sans-serif;color:#fff;cursor:pointer;text-align:center;">Restart</div>
+            <div style="background:#E53834;border-radius:6px;padding:9px;font:700 12px/1 -apple-system,sans-serif;color:#fff;cursor:pointer;text-align:center;">Stop</div>
+          </div>
+        </div>
+
+        <div style="background:#181330;border-radius:8px;padding:12px;">
+          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;">
+            <span style="font:600 10px/1 -apple-system,sans-serif;color:#5A5272;letter-spacing:1.1px;text-transform:uppercase;">Process Details</span>
+            <div style="display:flex;align-items:center;gap:6px;">
+              <div style="width:6px;height:6px;border-radius:50%;background:#28BF7D;animation:pkPulse 2s ease-in-out infinite;"></div>
+              <span style="font:500 11px/1 -apple-system,sans-serif;color:#28BF7D;">Running</span>
+            </div>
+          </div>
+          <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:10px;">
+            <div>
+              <div style="font:600 9px/1 -apple-system,sans-serif;color:#5A5272;text-transform:uppercase;letter-spacing:0.7px;margin-bottom:4px;">PID</div>
+              <div style="font:500 13px/1 'SF Mono',ui-monospace,'Courier New',monospace;color:#ECE5F7;">14821</div>
+            </div>
+            <div>
+              <div style="font:600 9px/1 -apple-system,sans-serif;color:#5A5272;text-transform:uppercase;letter-spacing:0.7px;margin-bottom:4px;">PPID</div>
+              <div style="font:500 13px/1 'SF Mono',ui-monospace,'Courier New',monospace;color:#9790B2;">1482</div>
+            </div>
+            <div>
+              <div style="font:600 9px/1 -apple-system,sans-serif;color:#5A5272;text-transform:uppercase;letter-spacing:0.7px;margin-bottom:4px;">Port</div>
+              <div style="font:500 13px/1 'SF Mono',ui-monospace,'Courier New',monospace;color:#00B4DA;">5173</div>
+            </div>
+            <div>
+              <div style="font:600 9px/1 -apple-system,sans-serif;color:#5A5272;text-transform:uppercase;letter-spacing:0.7px;margin-bottom:4px;">TTY</div>
+              <div style="font:500 11px/1 -apple-system,sans-serif;color:#9790B2;">Terminal</div>
+            </div>
+          </div>
+          <div>
+            <div style="font:600 9px/1 -apple-system,sans-serif;color:#5A5272;text-transform:uppercase;letter-spacing:0.7px;margin-bottom:5px;">Command Args</div>
+            <div style="background:#1F1B3C;border-radius:5px;padding:7px 9px;font:400 10px/1.5 'SF Mono',ui-monospace,'Courier New',monospace;color:#9790B2;">flutter run --debug --device-id macos</div>
+          </div>
+          <div style="margin-top:8px;text-align:right;">
+            <span style="font:500 11px/1 -apple-system,sans-serif;color:#00B4DA;cursor:pointer;">↗ Open localhost:5173</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════════════
+     DASHBOARD B — Wide Sidebar + Two-Column Main
+     ═══════════════════════════════════════════════════════════════════ -->
+<div style="position:absolute;left:1440px;top:1026px;width:1280px;">
+  <div data-drags-parent="1" style="position:absolute;top:-22px;font:500 11px/1 -apple-system,sans-serif;color:rgba(180,165,240,0.52);">Dashboard B — Wide Sidebar + Two-Column Main</div>
+
+  <div data-screen-label="Dashboard B" style="background:#0D0A1C;border-radius:12px;box-shadow:0 24px 80px rgba(0,0,0,0.80),0 0 0 1px rgba(91,60,196,0.25);overflow:hidden;height:780px;display:flex;flex-direction:column;">
+
+    <!-- title bar -->
+    <div style="background:#0A0818;border-bottom:1px solid rgba(91,60,196,0.14);padding:0 16px;height:44px;display:flex;align-items:center;gap:12px;flex-shrink:0;">
+      <div style="display:flex;gap:7px;flex-shrink:0;">
+        <div style="width:12px;height:12px;border-radius:50%;background:#FF5F56;"></div>
+        <div style="width:12px;height:12px;border-radius:50%;background:#FFBD2E;"></div>
+        <div style="width:12px;height:12px;border-radius:50%;background:#27C93F;"></div>
+      </div>
+      <span style="font:700 13px/1 -apple-system,sans-serif;color:#ECE5F7;flex-shrink:0;letter-spacing:-0.2px;">ProcessKill</span>
+      <div style="flex:1;max-width:360px;margin:0 auto;background:#181330;border:1px solid rgba(91,60,196,0.20);border-radius:6px;padding:6px 10px;display:flex;align-items:center;gap:7px;">
+        <span style="font:400 13px/1 -apple-system,sans-serif;color:#5A5272;">⌕</span>
+        <span style="font:400 11px/1 -apple-system,sans-serif;color:#5A5272;">Search projects, commands…</span>
+      </div>
+      <div style="margin-left:auto;flex-shrink:0;">
+        <div style="background:rgba(91,60,196,0.10);border:1px solid rgba(91,60,196,0.20);border-radius:5px;padding:5px 9px;font:600 10px/1 -apple-system,sans-serif;color:#9790B2;cursor:pointer;">Compact ↗</div>
+      </div>
+    </div>
+
+    <!-- body -->
+    <div style="display:flex;flex:1;overflow:hidden;">
+
+      <!-- wide sidebar -->
+      <div style="width:280px;background:#0A0816;border-right:1px solid rgba(91,60,196,0.12);display:flex;flex-direction:column;flex-shrink:0;">
+
+        <!-- projects section -->
+        <div style="flex:1;display:flex;flex-direction:column;overflow:hidden;border-bottom:1px solid rgba(91,60,196,0.12);">
+          <div style="padding:12px 12px 8px;display:flex;align-items:center;justify-content:space-between;">
+            <span style="font:600 10px/1 -apple-system,sans-serif;color:#5A5272;letter-spacing:1.1px;text-transform:uppercase;">Projects</span>
+            <div style="background:rgba(91,60,196,0.10);border:1px solid rgba(91,60,196,0.20);border-radius:4px;padding:3px 8px;font:600 10px/1 -apple-system,sans-serif;color:#9790B2;cursor:pointer;">+ Add</div>
+          </div>
+          <div style="flex:1;padding:0 8px 8px;overflow:hidden;">
+
+            <div style="background:#1F1B3C;border-radius:6px;padding:8px 10px;margin-bottom:3px;cursor:pointer;display:flex;align-items:center;justify-content:space-between;">
+              <div>
+                <div style="font:700 12px/1 -apple-system,sans-serif;color:#ECE5F7;margin-bottom:4px;">capibara_app</div>
+                <div style="display:flex;align-items:center;gap:5px;">
+                  <span style="background:rgba(94,223,208,0.12);border:1px solid rgba(94,223,208,0.22);border-radius:3px;padding:1px 5px;font:600 9px/1 -apple-system,sans-serif;color:#5EDFD0;text-transform:uppercase;letter-spacing:0.3px;">Flutter</span>
+                  <div style="width:5px;height:5px;border-radius:50%;background:#28BF7D;"></div>
+                  <span style="font:500 9px/1 'SF Mono',ui-monospace,'Courier New',monospace;color:#28BF7D;">:5173</span>
+                </div>
+              </div>
+              <span style="font:400 14px/1 -apple-system,sans-serif;color:#5A5272;">›</span>
+            </div>
+
+            <div style="border-radius:6px;padding:8px 10px;margin-bottom:3px;cursor:pointer;display:flex;align-items:center;justify-content:space-between;">
+              <div>
+                <div style="font:600 12px/1 -apple-system,sans-serif;color:#9790B2;margin-bottom:4px;">wolves-den-bjj</div>
+                <div style="display:flex;align-items:center;gap:5px;">
+                  <span style="background:rgba(122,92,240,0.10);border:1px solid rgba(122,92,240,0.20);border-radius:3px;padding:1px 5px;font:600 9px/1 -apple-system,sans-serif;color:#7A5CF0;text-transform:uppercase;letter-spacing:0.3px;">Node</span>
+                  <div style="width:5px;height:5px;border-radius:50%;background:#28BF7D;"></div>
+                  <span style="font:500 9px/1 'SF Mono',ui-monospace,'Courier New',monospace;color:#28BF7D;">:3000</span>
+                </div>
+              </div>
+            </div>
+
+            <div style="border-radius:6px;padding:8px 10px;cursor:pointer;">
+              <div style="font:600 12px/1 -apple-system,sans-serif;color:#9790B2;margin-bottom:4px;">tabor-api</div>
+              <span style="background:rgba(0,180,218,0.10);border:1px solid rgba(0,180,218,0.20);border-radius:3px;padding:1px 5px;font:600 9px/1 -apple-system,sans-serif;color:#00B4DA;text-transform:uppercase;letter-spacing:0.3px;">.NET</span>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- running processes -->
+        <div style="padding:10px 12px;flex-shrink:0;">
+          <div style="font:600 10px/1 -apple-system,sans-serif;color:#5A5272;letter-spacing:1.1px;text-transform:uppercase;margin-bottom:8px;">Running</div>
+
+          <div style="background:#181330;border:1px solid rgba(40,191,125,0.20);border-radius:6px;padding:8px 10px;margin-bottom:5px;">
+            <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:4px;">
+              <div style="display:flex;align-items:center;gap:6px;">
+                <div style="width:6px;height:6px;border-radius:50%;background:#28BF7D;animation:pkPulse 2s ease-in-out infinite;flex-shrink:0;"></div>
+                <span style="font:600 11px/1 -apple-system,sans-serif;color:#ECE5F7;">npm run dev</span>
+              </div>
+              <div style="display:flex;gap:3px;">
+                <div style="background:rgba(91,60,196,0.10);border-radius:3px;padding:2px 5px;font:600 9px/1 -apple-system,sans-serif;color:#9790B2;cursor:pointer;">↺</div>
+                <div style="background:rgba(229,56,52,0.10);border-radius:3px;padding:2px 5px;font:600 9px/1 -apple-system,sans-serif;color:#E53834;cursor:pointer;">■</div>
+              </div>
+            </div>
+            <div style="display:flex;gap:8px;align-items:center;">
+              <span style="font:500 10px/1 'SF Mono',ui-monospace,'Courier New',monospace;color:#00B4DA;">:3000</span>
+              <span style="font:400 10px/1 -apple-system,sans-serif;color:#5A5272;">PID 12847</span>
+              <span style="font:400 10px/1 -apple-system,sans-serif;color:#5A5272;">wolves-den-bjj</span>
+            </div>
+          </div>
+
+          <div style="background:#181330;border:1px solid rgba(40,191,125,0.15);border-radius:6px;padding:8px 10px;">
+            <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:4px;">
+              <div style="display:flex;align-items:center;gap:6px;">
+                <div style="width:6px;height:6px;border-radius:50%;background:#28BF7D;animation:pkPulse 2s ease-in-out infinite;flex-shrink:0;"></div>
+                <span style="font:600 11px/1 -apple-system,sans-serif;color:#ECE5F7;">flutter run</span>
+              </div>
+              <div style="display:flex;gap:3px;">
+                <div style="background:rgba(91,60,196,0.10);border-radius:3px;padding:2px 5px;font:600 9px/1 -apple-system,sans-serif;color:#9790B2;cursor:pointer;">↺</div>
+                <div style="background:rgba(229,56,52,0.10);border-radius:3px;padding:2px 5px;font:600 9px/1 -apple-system,sans-serif;color:#E53834;cursor:pointer;">■</div>
+              </div>
+            </div>
+            <div style="display:flex;gap:8px;align-items:center;">
+              <span style="font:500 10px/1 'SF Mono',ui-monospace,'Courier New',monospace;color:#00B4DA;">:5173</span>
+              <span style="font:400 10px/1 -apple-system,sans-serif;color:#5A5272;">PID 14821</span>
+              <span style="font:400 10px/1 -apple-system,sans-serif;color:#5A5272;">capibara_app</span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- main: two columns -->
+      <div style="flex:1;display:flex;overflow:hidden;">
+
+        <!-- left: command list -->
+        <div style="width:350px;border-right:1px solid rgba(91,60,196,0.12);display:flex;flex-direction:column;overflow:hidden;">
+          <div style="padding:14px 14px 10px;border-bottom:1px solid rgba(91,60,196,0.10);">
+            <div style="display:flex;align-items:center;gap:7px;margin-bottom:4px;">
+              <span style="font:700 16px/1 -apple-system,sans-serif;color:#ECE5F7;letter-spacing:-0.3px;">capibara_app</span>
+              <span style="background:rgba(94,223,208,0.12);border:1px solid rgba(94,223,208,0.28);border-radius:3px;padding:2px 6px;font:600 9px/1 -apple-system,sans-serif;color:#5EDFD0;text-transform:uppercase;letter-spacing:0.4px;">Flutter</span>
+            </div>
+            <div style="font:400 10px/1 'SF Mono',ui-monospace,'Courier New',monospace;color:#5A5272;">/Users/carlosbastida/Repos/capibara_app</div>
+          </div>
+
+          <div style="padding:7px 14px;border-bottom:1px solid rgba(91,60,196,0.10);display:grid;grid-template-columns:80px 1fr;gap:8px;background:#0D0A1C;">
+            <span style="font:600 9px/1 -apple-system,sans-serif;color:#5A5272;text-transform:uppercase;letter-spacing:0.8px;">Name</span>
+            <span style="font:600 9px/1 -apple-system,sans-serif;color:#5A5272;text-transform:uppercase;letter-spacing:0.8px;">Command</span>
+          </div>
+
+          <div style="flex:1;overflow:hidden;">
+            <div style="background:#1F1B3C;border-left:2px solid #5EDFD0;padding:9px 12px 9px 12px;display:grid;grid-template-columns:80px 1fr;gap:8px;align-items:center;cursor:pointer;">
+              <span style="font:700 12px/1 -apple-system,sans-serif;color:#ECE5F7;">run</span>
+              <span style="font:400 11px/1 'SF Mono',ui-monospace,'Courier New',monospace;color:#5EDFD0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">flutter run</span>
+            </div>
+            <div style="padding:9px 12px 9px 14px;display:grid;grid-template-columns:80px 1fr;gap:8px;align-items:center;cursor:pointer;border-top:1px solid rgba(91,60,196,0.08);">
+              <span style="font:400 12px/1 -apple-system,sans-serif;color:#9790B2;">pub get</span>
+              <span style="font:400 11px/1 'SF Mono',ui-monospace,'Courier New',monospace;color:#5A5272;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">flutter pub get</span>
+            </div>
+            <div style="padding:9px 12px 9px 14px;display:grid;grid-template-columns:80px 1fr;gap:8px;align-items:center;cursor:pointer;border-top:1px solid rgba(91,60,196,0.08);">
+              <span style="font:400 12px/1 -apple-system,sans-serif;color:#9790B2;">test</span>
+              <span style="font:400 11px/1 'SF Mono',ui-monospace,'Courier New',monospace;color:#5A5272;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">flutter test</span>
+            </div>
+            <div style="padding:9px 12px 9px 14px;display:grid;grid-template-columns:80px 1fr;gap:8px;align-items:center;cursor:pointer;border-top:1px solid rgba(91,60,196,0.08);">
+              <span style="font:400 12px/1 -apple-system,sans-serif;color:#9790B2;">build macOS</span>
+              <span style="font:400 11px/1 'SF Mono',ui-monospace,'Courier New',monospace;color:#5A5272;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">flutter build macos</span>
+            </div>
+            <div style="padding:9px 12px 9px 14px;display:grid;grid-template-columns:80px 1fr;gap:8px;align-items:center;cursor:pointer;border-top:1px solid rgba(91,60,196,0.08);">
+              <span style="font:400 12px/1 -apple-system,sans-serif;color:#9790B2;">clean</span>
+              <span style="font:400 11px/1 'SF Mono',ui-monospace,'Courier New',monospace;color:#5A5272;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">flutter clean</span>
+            </div>
+            <div style="padding:9px 12px 9px 14px;border-top:1px solid rgba(91,60,196,0.08);cursor:pointer;">
+              <span style="font:400 11px/1 -apple-system,sans-serif;color:#7A5CF0;">+ Add custom command</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- right: runner + process details -->
+        <div style="flex:1;display:flex;flex-direction:column;overflow-y:auto;padding:14px;gap:12px;">
+
+          <div style="background:#181330;border-radius:8px;padding:12px;">
+            <div style="font:600 10px/1 -apple-system,sans-serif;color:#5A5272;letter-spacing:1.1px;text-transform:uppercase;margin-bottom:10px;">Runner</div>
+            <div style="margin-bottom:8px;">
+              <div style="font:600 9px/1 -apple-system,sans-serif;color:#5A5272;letter-spacing:0.8px;text-transform:uppercase;margin-bottom:5px;">Command</div>
+              <div style="background:#1F1B3C;border:1px solid rgba(0,180,218,0.35);border-radius:6px;padding:8px 10px;font:400 12px/1 'SF Mono',ui-monospace,'Courier New',monospace;color:#ECE5F7;">flutter run</div>
+            </div>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:8px;">
+              <div>
+                <div style="font:600 9px/1 -apple-system,sans-serif;color:#5A5272;letter-spacing:0.8px;text-transform:uppercase;margin-bottom:5px;">Port</div>
+                <div style="background:#1F1B3C;border:1px solid rgba(91,60,196,0.25);border-radius:6px;padding:8px 10px;font:500 12px/1 'SF Mono',ui-monospace,'Courier New',monospace;color:#00B4DA;">5173</div>
+              </div>
+              <div>
+                <div style="font:600 9px/1 -apple-system,sans-serif;color:#5A5272;letter-spacing:0.8px;text-transform:uppercase;margin-bottom:5px;">Status</div>
+                <div style="background:#1F1B3C;border:1px solid rgba(40,191,125,0.25);border-radius:6px;padding:8px 10px;display:flex;align-items:center;gap:6px;">
+                  <div style="width:6px;height:6px;border-radius:50%;background:#28BF7D;animation:pkPulse 2s ease-in-out infinite;"></div>
+                  <span style="font:500 11px/1 -apple-system,sans-serif;color:#28BF7D;">Running</span>
+                </div>
+              </div>
+            </div>
+            <div style="margin-bottom:10px;">
+              <div style="font:600 9px/1 -apple-system,sans-serif;color:#5A5272;letter-spacing:0.8px;text-transform:uppercase;margin-bottom:5px;">Working Directory</div>
+              <div style="background:#1F1B3C;border:1px solid rgba(91,60,196,0.25);border-radius:6px;padding:8px 10px;font:400 11px/1 'SF Mono',ui-monospace,'Courier New',monospace;color:#9790B2;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">/Users/carlosbastida/Repos/capibara_app</div>
+            </div>
+            <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px;">
+              <div style="background:#5EDFD0;border-radius:6px;padding:9px;font:700 12px/1 -apple-system,sans-serif;color:#0A0818;cursor:pointer;text-align:center;">Start</div>
+              <div style="background:#FF7043;border-radius:6px;padding:9px;font:700 12px/1 -apple-system,sans-serif;color:#fff;cursor:pointer;text-align:center;">Restart</div>
+              <div style="background:#E53834;border-radius:6px;padding:9px;font:700 12px/1 -apple-system,sans-serif;color:#fff;cursor:pointer;text-align:center;">Stop</div>
+            </div>
+          </div>
+
+          <div style="background:#181330;border-radius:8px;padding:12px;">
+            <div style="font:600 10px/1 -apple-system,sans-serif;color:#5A5272;letter-spacing:1.1px;text-transform:uppercase;margin-bottom:10px;">Process Details</div>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px;">
+              <div>
+                <div style="font:600 9px/1 -apple-system,sans-serif;color:#5A5272;text-transform:uppercase;letter-spacing:0.7px;margin-bottom:4px;">PID</div>
+                <div style="font:500 14px/1 'SF Mono',ui-monospace,'Courier New',monospace;color:#ECE5F7;">14821</div>
+              </div>
+              <div>
+                <div style="font:600 9px/1 -apple-system,sans-serif;color:#5A5272;text-transform:uppercase;letter-spacing:0.7px;margin-bottom:4px;">PPID</div>
+                <div style="font:500 14px/1 'SF Mono',ui-monospace,'Courier New',monospace;color:#9790B2;">1482</div>
+              </div>
+            </div>
+            <div>
+              <div style="font:600 9px/1 -apple-system,sans-serif;color:#5A5272;text-transform:uppercase;letter-spacing:0.7px;margin-bottom:5px;">Command Args</div>
+              <div style="background:#1F1B3C;border-radius:5px;padding:7px 9px;font:400 10px/1.5 'SF Mono',ui-monospace,'Courier New',monospace;color:#9790B2;">flutter run --debug --device-id macos</div>
+            </div>
+            <div style="margin-top:10px;padding-top:10px;border-top:1px solid rgba(91,60,196,0.10);text-align:right;">
+              <span style="font:500 11px/1 -apple-system,sans-serif;color:#00B4DA;cursor:pointer;">↗ Open localhost:5173</span>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+</x-dc>
+</body>
+</html>
