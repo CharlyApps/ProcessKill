@@ -1,4 +1,5 @@
 # ProcessKill
+<img width="1024" height="1024" alt="App Icon" src="https://github.com/user-attachments/assets/f745633d-49a1-4912-bc4d-56dee7c26fb8" />
 
 A small native macOS SwiftUI utility for checking what is listening on a local port and managing it from one compact window or menu bar popover.
 
