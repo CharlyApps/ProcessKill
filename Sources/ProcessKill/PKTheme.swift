@@ -105,14 +105,25 @@ extension Text {
 }
 
 struct PKPrimaryButtonStyle: ButtonStyle {
+    @Environment(\.isEnabled) private var isEnabled
+
     let color: Color
     let foreground: Color
 
     func makeBody(configuration: Configuration) -> some View {
         configuration.label
             .pkFont(size: 12, weight: .bold)
-            .foregroundStyle(foreground)
+            .foregroundStyle(isEnabled ? foreground : PK.textMuted.opacity(0.85))
             .frame(maxWidth: .infinity, minHeight: 38)
-            .background(color.opacity(configuration.isPressed ? 0.82 : 1), in: RoundedRectangle(cornerRadius: 6))
+            .background(backgroundColor(configuration: configuration), in: RoundedRectangle(cornerRadius: 6))
+            .overlay(RoundedRectangle(cornerRadius: 6).stroke(isEnabled ? .clear : PK.borderNormal.opacity(0.8)))
+    }
+
+    private func backgroundColor(configuration: Configuration) -> Color {
+        guard isEnabled else {
+            return PK.textMuted.opacity(0.16)
+        }
+
+        return color.opacity(configuration.isPressed ? 0.82 : 1)
     }
 }

@@ -176,13 +176,13 @@ struct CompactView: View {
                 Task { await model.restart() }
             }
             .buttonStyle(PKPrimaryButtonStyle(color: PK.orange, foreground: .white))
-            .disabled(model.selectedProcess == nil || model.isBusy)
+            .disabled(!model.canControlSelectedProcess || model.isBusy)
 
             Button(model.stopConfirmPending ? "Confirm?" : "Stop") {
                 Task { await model.stop() }
             }
             .buttonStyle(PKPrimaryButtonStyle(color: PK.red, foreground: .white))
-            .disabled(model.selectedProcess == nil || model.isBusy)
+            .disabled(!model.canControlSelectedProcess || model.isBusy)
         }
         .padding(.horizontal, 12)
         .padding(.top, 6)

@@ -113,6 +113,12 @@ enum ProcessService {
 
         if Darwin.kill(pid, 0) == 0 {
             Darwin.kill(pid, SIGKILL)
+            for _ in 0..<10 {
+                try? await Task.sleep(for: .milliseconds(100))
+                if Darwin.kill(pid, 0) != 0 {
+                    break
+                }
+            }
             return "SIGKILL"
         }
 

@@ -63,6 +63,14 @@ final class ProcessMonitor: ObservableObject {
         !processes.isEmpty
     }
 
+    var canControlSelectedProcess: Bool {
+        guard selectedProcess != nil else {
+            return false
+        }
+
+        return portProcessMatchesSelectedProject(processes)
+    }
+
     var groupNames: [String] {
         let names = projectGroups + projects.compactMap { normalizedGroupName($0.groupName) }
         return Array(Set(names)).sorted { $0.localizedCaseInsensitiveCompare($1) == .orderedAscending }
@@ -405,10 +413,24 @@ final class ProcessMonitor: ObservableObject {
         status = .working("Restarting PID \(selectedProcess.pid)...")
 
         do {
-            _ = try await ProcessService.stop(pid: selectedProcess.pid)
+            let signal = try await ProcessService.stop(pid: selectedProcess.pid)
             launchedProcesses[selectedProcess.pid] = nil
             activeLaunchPIDs.remove(selectedProcess.pid)
-            try? await Task.sleep(for: .milliseconds(500))
+            appendLog("Stopped PID \(selectedProcess.pid) with \(signal).", kind: .info)
+
+            if let port = parsedPort {
+                status = .working("Waiting for port \(port) to free...")
+                let remainingProcesses = await waitForPortToClear(port)
+                guard remainingProcesses.isEmpty else {
+                    let holders = remainingProcesses
+                        .map { "\($0.command) PID \($0.pid)" }
+                        .joined(separator: ", ")
+                    throw ProcessServiceError.commandFailed("Port \(port) is still busy: \(holders).")
+                }
+            } else {
+                try? await Task.sleep(for: .milliseconds(500))
+            }
+
             let pid = try launchCurrentCommand(
                 workingDirectory: workingDirectory.isEmpty ? selectedProcess.workingDirectory : workingDirectory,
                 action: "restart"
@@ -588,6 +610,20 @@ final class ProcessMonitor: ObservableObject {
                 status = .error("Command \(action) failed with exit \(exitCode). See console.")
             }
         }
+    }
+
+    private func waitForPortToClear(_ port: Int) async -> [PortProcess] {
+        var remainingProcesses: [PortProcess] = []
+
+        for _ in 0..<25 {
+            remainingProcesses = (try? await ProcessService.findProcesses(onPort: port)) ?? []
+            if remainingProcesses.isEmpty {
+                return []
+            }
+            try? await Task.sleep(for: .milliseconds(200))
+        }
+
+        return remainingProcesses
     }
 
     private func appendLog(_ text: String, kind: CommandLogEntry.Kind) {
