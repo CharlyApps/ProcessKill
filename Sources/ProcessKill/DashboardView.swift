@@ -92,31 +92,39 @@ struct DashboardView: View {
                 .padding(.bottom, 8)
 
                 if isCreatingGroup {
-                    HStack(spacing: 6) {
-                        TextField("Group name", text: $model.newGroupName)
-                            .textFieldStyle(.plain)
-                            .pkFont(size: 11)
-                            .foregroundStyle(PK.textPrimary)
-                            .padding(.horizontal, 8)
-                            .padding(.vertical, 6)
-                            .background(PK.bgSection, in: RoundedRectangle(cornerRadius: 5))
-                            .overlay(RoundedRectangle(cornerRadius: 5).stroke(PK.borderNormal.opacity(0.75)))
-                            .onSubmit {
+                    VStack(spacing: 6) {
+                        HStack(spacing: 6) {
+                            TextField("Group name", text: $model.newGroupName)
+                                .textFieldStyle(.plain)
+                                .pkFont(size: 11)
+                                .foregroundStyle(PK.textPrimary)
+                                .padding(.horizontal, 8)
+                                .padding(.vertical, 6)
+                                .background(PK.bgSection, in: RoundedRectangle(cornerRadius: 5))
+                                .overlay(RoundedRectangle(cornerRadius: 5).stroke(PK.borderNormal.opacity(0.75)))
+                                .onSubmit {
+                                    model.createGroup()
+                                    isCreatingGroup = false
+                                }
+
+                            Button("Create") {
                                 model.createGroup()
                                 isCreatingGroup = false
                             }
-
-                        Button("Create") {
-                            model.createGroup()
-                            isCreatingGroup = false
+                            .buttonStyle(.plain)
+                            .pkFont(size: 10, weight: .semibold)
+                            .foregroundStyle(PK.teal)
+                            .padding(.horizontal, 8)
+                            .padding(.vertical, 6)
+                            .background(PK.teal.opacity(0.10), in: RoundedRectangle(cornerRadius: 5))
+                            .overlay(RoundedRectangle(cornerRadius: 5).stroke(PK.teal.opacity(0.22)))
                         }
-                        .buttonStyle(.plain)
-                        .pkFont(size: 10, weight: .semibold)
-                        .foregroundStyle(PK.teal)
-                        .padding(.horizontal, 8)
-                        .padding(.vertical, 6)
-                        .background(PK.teal.opacity(0.10), in: RoundedRectangle(cornerRadius: 5))
-                        .overlay(RoundedRectangle(cornerRadius: 5).stroke(PK.teal.opacity(0.22)))
+                        if let project = model.selectedProject {
+                            Text("Will be assigned to \(project.name)")
+                                .pkFont(size: 9)
+                                .foregroundStyle(PK.textMuted)
+                                .padding(.horizontal, 12)
+                        }
                     }
                     .padding(.horizontal, 12)
                     .padding(.bottom, 8)

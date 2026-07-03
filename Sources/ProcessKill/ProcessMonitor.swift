@@ -502,7 +502,7 @@ final class ProcessMonitor: ObservableObject {
     }
 
     func createGroup() {
-        addGroupFromInput()
+        addGroupFromInput(for: selectedProjectID)
     }
 
     func adjustSidebarWidth(by delta: CGFloat) {
