@@ -1,0 +1,11 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "ProcessKill",
+      "runtimeExecutable": "swift",
+      "runtimeArgs": ["build", "--configuration", "debug"],
+      "port": 3000
+    }
+  ]
+}

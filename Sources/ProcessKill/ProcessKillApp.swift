@@ -13,6 +13,10 @@ struct ProcessKillApp: App {
                 .environment(\.pkFontScale, CGFloat(fontScale))
                 .frame(minWidth: 980, idealWidth: 1280, minHeight: 680, idealHeight: 780)
                 .background(WindowAccessor())
+                .onAppear {
+                    NSApp.setActivationPolicy(.regular)
+                    NSApp.activate(ignoringOtherApps: true)
+                }
         }
         .windowStyle(.hiddenTitleBar)
         .commands {
@@ -61,7 +65,7 @@ private struct WindowAccessor: NSViewRepresentable {
         DispatchQueue.main.async {
             guard let window = view.window else { return }
             window.title = "ProcessKill"
-            window.isMovableByWindowBackground = true
+            window.isMovableByWindowBackground = false
             window.titlebarAppearsTransparent = true
             window.backgroundColor = .windowBackgroundColor
         }
@@ -69,4 +73,18 @@ private struct WindowAccessor: NSViewRepresentable {
     }
 
     func updateNSView(_ nsView: NSView, context: Context) {}
+}
+
+struct TitleBarDragArea: NSViewRepresentable {
+    func makeNSView(context: Context) -> DraggableView {
+        DraggableView()
+    }
+
+    func updateNSView(_ nsView: DraggableView, context: Context) {}
+}
+
+final class DraggableView: NSView {
+    override func mouseDown(with event: NSEvent) {
+        window?.performDrag(with: event)
+    }
 }

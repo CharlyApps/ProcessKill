@@ -26,6 +26,10 @@ final class ProcessMonitor: ObservableObject {
     @Published var newGroupName: String = ""
     @Published var projectGroups: [String] = []
     @Published var collapsedGroups: Set<String> = []
+    @Published var groupPendingDeletion: String?
+    @Published var deleteProjectsWithGroup = false
+    @Published var groupBeingRenamed: String?
+    @Published var renameGroupText: String = ""
     @Published var sidebarWidth: CGFloat = 360
     @Published var commandLogs: [CommandLogEntry] = []
     @Published var activeLaunchPIDs: Set<Int32> = []
@@ -502,7 +506,97 @@ final class ProcessMonitor: ObservableObject {
     }
 
     func createGroup() {
-        addGroupFromInput(for: selectedProjectID)
+        addGroupFromInput()
+    }
+
+    func projectsInGroup(_ groupName: String) -> [ProjectItem] {
+        projects.filter { normalizedGroupName($0.groupName) == groupName }
+    }
+
+    func requestDeleteGroup(_ groupName: String) {
+        guard groupName != "Ungrouped" else { return }
+        if projectsInGroup(groupName).isEmpty {
+            removeGroup(groupName)
+        } else {
+            deleteProjectsWithGroup = false
+            groupPendingDeletion = groupName
+        }
+    }
+
+    func cancelDeleteGroup() {
+        groupPendingDeletion = nil
+        deleteProjectsWithGroup = false
+    }
+
+    func confirmDeleteGroup() {
+        guard let groupName = groupPendingDeletion else { return }
+
+        if deleteProjectsWithGroup {
+            for id in projectsInGroup(groupName).map(\.id) {
+                removeProject(id: id)
+            }
+        } else {
+            for index in projects.indices where normalizedGroupName(projects[index].groupName) == groupName {
+                projects[index].groupName = nil
+            }
+            saveProjects()
+        }
+
+        removeGroup(groupName)
+        groupPendingDeletion = nil
+        deleteProjectsWithGroup = false
+    }
+
+    private func removeGroup(_ groupName: String) {
+        projectGroups.removeAll { $0 == groupName }
+        collapsedGroups.remove(groupName)
+        saveProjectGroups()
+    }
+
+    func startRenamingGroup(_ groupName: String) {
+        groupBeingRenamed = groupName
+        renameGroupText = groupName
+    }
+
+    func cancelRenameGroup() {
+        groupBeingRenamed = nil
+        renameGroupText = ""
+    }
+
+    func confirmRenameGroup() {
+        guard let oldName = groupBeingRenamed else { return }
+        defer { cancelRenameGroup() }
+
+        guard let newName = normalizedGroupName(renameGroupText), newName != oldName else {
+            return
+        }
+
+        let wasCollapsed = collapsedGroups.contains(oldName)
+
+        if let existingName = projectGroups.first(where: { $0.caseInsensitiveCompare(newName) == .orderedSame }) {
+            for index in projects.indices where projects[index].groupName == oldName {
+                projects[index].groupName = existingName
+            }
+            saveProjects()
+            removeGroup(oldName)
+            if wasCollapsed {
+                collapsedGroups.insert(existingName)
+            }
+        } else {
+            if let index = projectGroups.firstIndex(of: oldName) {
+                projectGroups[index] = newName
+                projectGroups.sort { $0.localizedCaseInsensitiveCompare($1) == .orderedAscending }
+                saveProjectGroups()
+            }
+            for index in projects.indices where projects[index].groupName == oldName {
+                projects[index].groupName = newName
+            }
+            saveProjects()
+            collapsedGroups.remove(oldName)
+            if wasCollapsed {
+                collapsedGroups.insert(newName)
+            }
+        }
     }
 
     func adjustSidebarWidth(by delta: CGFloat) {
