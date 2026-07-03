@@ -60,7 +60,7 @@ struct DashboardView: View {
                     Button("Cancel") {
                         model.cancelDeleteGroup()
                     }
-                    .buttonStyle(.plain)
+                    .buttonStyle(PKPlainButtonStyle())
                     .pkFont(size: 11, weight: .semibold)
                     .foregroundStyle(PK.textSecondary)
                     .padding(.horizontal, 12)
@@ -69,7 +69,7 @@ struct DashboardView: View {
                     Button("Delete Group") {
                         model.confirmDeleteGroup()
                     }
-                    .buttonStyle(.plain)
+                    .buttonStyle(PKPlainButtonStyle())
                     .pkFont(size: 11, weight: .semibold)
                     .foregroundStyle(.white)
                     .padding(.horizontal, 12)
@@ -97,10 +97,20 @@ struct DashboardView: View {
                 Text("⌕")
                     .pkFont(size: 13)
                     .foregroundStyle(PK.textMuted)
-                Text("Search projects, commands...")
+                TextField("Search projects, commands...", text: $model.searchText)
+                    .textFieldStyle(.plain)
                     .pkFont(size: 11)
-                    .foregroundStyle(PK.textMuted)
-                Spacer()
+                    .foregroundStyle(PK.textPrimary)
+                if !model.searchText.isEmpty {
+                    Button {
+                        model.searchText = ""
+                    } label: {
+                        Text("✕")
+                            .pkFont(size: 10)
+                            .foregroundStyle(PK.textMuted)
+                    }
+                    .buttonStyle(PKPlainButtonStyle())
+                }
             }
             .frame(maxWidth: 360)
             .padding(.horizontal, 10)
@@ -133,7 +143,7 @@ struct DashboardView: View {
                             model.newGroupName = ""
                         }
                     }
-                    .buttonStyle(.plain)
+                    .buttonStyle(PKPlainButtonStyle())
                     .pkFont(size: 10, weight: .semibold)
                     .foregroundStyle(PK.textSecondary)
                     .padding(.horizontal, 8)
@@ -144,7 +154,7 @@ struct DashboardView: View {
                     Button("+ Add") {
                         model.addProjectFolder()
                     }
-                    .buttonStyle(.plain)
+                    .buttonStyle(PKPlainButtonStyle())
                     .pkFont(size: 10, weight: .semibold)
                     .foregroundStyle(PK.textSecondary)
                     .padding(.horizontal, 8)
@@ -176,7 +186,7 @@ struct DashboardView: View {
                             model.createGroup()
                             isCreatingGroup = false
                         }
-                        .buttonStyle(.plain)
+                        .buttonStyle(PKPlainButtonStyle())
                         .pkFont(size: 10, weight: .semibold)
                         .foregroundStyle(PK.teal)
                         .padding(.horizontal, 8)
@@ -208,13 +218,13 @@ struct DashboardView: View {
                                         Button("Save") {
                                             model.confirmRenameGroup()
                                         }
-                                        .buttonStyle(.plain)
+                                        .buttonStyle(PKPlainButtonStyle())
                                         .pkFont(size: 9, weight: .semibold)
                                         .foregroundStyle(PK.teal)
                                         Button("Cancel") {
                                             model.cancelRenameGroup()
                                         }
-                                        .buttonStyle(.plain)
+                                        .buttonStyle(PKPlainButtonStyle())
                                         .pkFont(size: 9, weight: .semibold)
                                         .foregroundStyle(PK.textMuted)
                                     }
@@ -249,7 +259,7 @@ struct DashboardView: View {
                                                         .pkFont(size: 11, weight: .semibold)
                                                         .foregroundStyle(PK.textMuted)
                                                 }
-                                                .buttonStyle(.plain)
+                                                .buttonStyle(PKPlainButtonStyle())
                                                 .menuIndicator(.hidden)
                                                 .fixedSize()
                                             }
@@ -257,7 +267,7 @@ struct DashboardView: View {
                                         .padding(.horizontal, 4)
                                         .padding(.top, 3)
                                     }
-                                    .buttonStyle(.plain)
+                                    .buttonStyle(PKPlainButtonStyle())
                                 }
 
                                 if !model.collapsedGroups.contains(group.name) {
@@ -530,7 +540,7 @@ struct DashboardView: View {
                 Button("Clear") {
                     model.clearLogs()
                 }
-                .buttonStyle(.plain)
+                .buttonStyle(PKPlainButtonStyle())
                 .pkFont(size: 10, weight: .semibold)
                 .foregroundStyle(PK.textMuted)
                 .disabled(model.commandLogs.isEmpty)
@@ -604,7 +614,7 @@ struct DashboardView: View {
                 Button("↗ Open localhost:\(model.port)") {
                     model.openLocalhost()
                 }
-                .buttonStyle(.plain)
+                .buttonStyle(PKPlainButtonStyle())
                 .pkFont(size: 11, weight: .medium)
                 .foregroundStyle(PK.cyan)
                 .frame(maxWidth: .infinity, alignment: .trailing)
@@ -727,7 +737,7 @@ private struct SidebarProjectRow: View {
                         .frame(width: 26, height: 26)
                         .contentShape(Rectangle())
                 }
-                .buttonStyle(.plain)
+                .buttonStyle(PKPlainButtonStyle())
                 .menuIndicator(.hidden)
             }
             .padding(.horizontal, 10)
@@ -736,7 +746,7 @@ private struct SidebarProjectRow: View {
             .background(isSelected ? PK.bgInput : .clear, in: RoundedRectangle(cornerRadius: 6))
             .contentShape(Rectangle())
         }
-        .buttonStyle(.plain)
+        .buttonStyle(PKPlainButtonStyle())
     }
 }
 
@@ -773,7 +783,7 @@ private struct RunningProcessRow: View {
                 }
                 .frame(maxWidth: .infinity, alignment: .leading)
             }
-            .buttonStyle(.plain)
+            .buttonStyle(PKPlainButtonStyle())
 
             Button(action: stop) {
                 Text("■")
@@ -783,7 +793,7 @@ private struct RunningProcessRow: View {
                     .padding(.vertical, 4)
                     .background(PK.red.opacity(0.10), in: RoundedRectangle(cornerRadius: 3))
             }
-            .buttonStyle(.plain)
+            .buttonStyle(PKPlainButtonStyle())
         }
         .padding(.horizontal, 10)
         .padding(.vertical, 8)
@@ -871,13 +881,13 @@ private struct DashboardCommandRow: View {
                     }
                 }
             }
-            .buttonStyle(.plain)
+            .buttonStyle(PKPlainButtonStyle())
 
             if command.isManual {
                 Button("−") {
                     remove()
                 }
-                .buttonStyle(.plain)
+                .buttonStyle(PKPlainButtonStyle())
                 .pkFont(size: 11, weight: .bold)
                 .foregroundStyle(PK.red)
                 .padding(.trailing, 8)
@@ -895,7 +905,7 @@ private struct AddCustomCommandRow: View {
             Button("+ Add custom command") {
                 isExpanded.toggle()
             }
-            .buttonStyle(.plain)
+            .buttonStyle(PKPlainButtonStyle())
             .pkFont(size: 11)
             .foregroundStyle(PK.purple)
 

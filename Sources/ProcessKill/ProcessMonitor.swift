@@ -16,6 +16,7 @@ final class ProcessMonitor: ObservableObject {
     @Published var status: StatusMessage = .ready
     @Published var isBusy = false
     @Published var projects: [ProjectItem] = []
+    @Published var searchText: String = ""
     @Published var selectedProjectID: UUID?
     @Published var selectedCommandID: UUID?
     @Published var activeTemplateCommandID: UUID?
@@ -81,10 +82,15 @@ final class ProcessMonitor: ObservableObject {
     }
 
     var groupedProjects: [(name: String, projects: [ProjectItem])] {
-        let grouped = Dictionary(grouping: projects) { project in
+        let query = searchText.trimmingCharacters(in: .whitespacesAndNewlines)
+        let visibleProjects = query.isEmpty ? projects : projects.filter { project in
+            project.name.localizedCaseInsensitiveContains(query)
+                || project.commands.contains { $0.name.localizedCaseInsensitiveContains(query) || $0.command.localizedCaseInsensitiveContains(query) }
+        }
+        let grouped = Dictionary(grouping: visibleProjects) { project in
             normalizedGroupName(project.groupName) ?? "Ungrouped"
         }
-        let allGroupNames = Set(groupNames + grouped.keys)
+        let allGroupNames = query.isEmpty ? Set(groupNames + grouped.keys) : Set(grouped.keys)
         return allGroupNames
             .map { groupName in
                 (

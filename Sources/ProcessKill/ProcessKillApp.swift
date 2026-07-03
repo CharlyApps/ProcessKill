@@ -5,12 +5,14 @@ import SwiftUI
 struct ProcessKillApp: App {
     @StateObject private var model = ProcessMonitor()
     @AppStorage("fontScale") private var fontScale = 1.0
+    @AppStorage("appTheme") private var theme = AppTheme.system
 
     var body: some Scene {
         WindowGroup {
             DashboardView()
                 .environmentObject(model)
                 .environment(\.pkFontScale, CGFloat(fontScale))
+                .preferredColorScheme(theme.colorScheme)
                 .frame(minWidth: 980, idealWidth: 1280, minHeight: 680, idealHeight: 780)
                 .background(WindowAccessor())
                 .onAppear {
@@ -43,14 +45,16 @@ struct ProcessKillApp: App {
             CompactView()
                 .environmentObject(model)
                 .environment(\.pkFontScale, CGFloat(fontScale))
+                .preferredColorScheme(theme.colorScheme)
                 .frame(width: 480, height: 520)
                 .background(PK.bgDeepest)
         }
         .menuBarExtraStyle(.window)
 
         Settings {
-            PreferencesView(fontScale: $fontScale)
+            PreferencesView(fontScale: $fontScale, theme: $theme)
                 .environment(\.pkFontScale, CGFloat(fontScale))
+                .preferredColorScheme(theme.colorScheme)
         }
     }
 

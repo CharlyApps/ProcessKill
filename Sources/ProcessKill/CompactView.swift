@@ -73,7 +73,7 @@ struct CompactView: View {
             .background(PK.bgSection, in: RoundedRectangle(cornerRadius: 8))
             .overlay(RoundedRectangle(cornerRadius: 8).stroke(PK.borderNormal))
         }
-        .buttonStyle(.plain)
+        .buttonStyle(PKPlainButtonStyle())
         .padding(.horizontal, 12)
         .padding(.top, 12)
     }
@@ -229,7 +229,7 @@ struct CompactView: View {
             Button("↗ localhost") {
                 model.openLocalhost()
             }
-            .buttonStyle(.plain)
+            .buttonStyle(PKPlainButtonStyle())
             .pkFont(size: 11, weight: .medium)
             .foregroundStyle(PK.cyan)
         }
@@ -322,7 +322,7 @@ private struct CompactCommandRow: View {
             }
             .overlay(Rectangle().fill(PK.borderDefault.opacity(isSelected ? 0 : 0.65)).frame(height: 1), alignment: .top)
         }
-        .buttonStyle(.plain)
+        .buttonStyle(PKPlainButtonStyle())
     }
 }
 
@@ -352,6 +352,6 @@ struct ProcessCard: View {
             .background(PK.bgSection, in: RoundedRectangle(cornerRadius: 6))
             .overlay(RoundedRectangle(cornerRadius: 6).stroke(isSelected ? PK.borderSelected : PK.borderDefault))
         }
-        .buttonStyle(.plain)
+        .buttonStyle(PKPlainButtonStyle())
     }
 }
