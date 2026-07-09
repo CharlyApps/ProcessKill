@@ -52,7 +52,7 @@ struct ManualCommandEditor: View {
                 Button("Add") {
                     model.addManualCommand()
                 }
-                .buttonStyle(.plain)
+                .buttonStyle(PKPlainButtonStyle())
                 .pkFont(size: 12, weight: .bold)
                 .foregroundStyle(Color(red: 0.36, green: 0.78, blue: 0.65))
                 .disabled(model.selectedProject == nil)

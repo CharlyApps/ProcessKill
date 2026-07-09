@@ -1,17 +1,18 @@
+import AppKit
 import SwiftUI
 
 enum PK {
-    static let bgDeepest = Color(hex: 0x0A0818)
-    static let bgMain = Color(hex: 0x121024)
-    static let bgSection = Color(hex: 0x181330)
-    static let bgInput = Color(hex: 0x1F1B3C)
-    static let bgSelected = Color(hex: 0x292147)
-    static let bgSidebar = Color(hex: 0x0A0816)
-    static let bgDeep2 = Color(hex: 0x0D0A1C)
+    static let bgDeepest = Color(light: 0xFDFCFA, dark: 0x0A0818)
+    static let bgMain = Color(light: 0xFAF9F6, dark: 0x121024)
+    static let bgSection = Color(light: 0xF2F0EA, dark: 0x181330)
+    static let bgInput = Color(light: 0xFFFFFF, dark: 0x1F1B3C)
+    static let bgSelected = Color(light: 0xE4E3ED, dark: 0x292147)
+    static let bgSidebar = Color(light: 0xFBFAF8, dark: 0x0A0816)
+    static let bgDeep2 = Color(light: 0xF5F3EE, dark: 0x0D0A1C)
 
-    static let textPrimary = Color(hex: 0xECE5F7)
-    static let textSecondary = Color(hex: 0x9790B2)
-    static let textMuted = Color(hex: 0x5A5272)
+    static let textPrimary = Color(light: 0x211E2E, dark: 0xECE5F7)
+    static let textSecondary = Color(light: 0x6B6558, dark: 0x9790B2)
+    static let textMuted = Color(light: 0xA39C8C, dark: 0x5A5272)
 
     static let cyan = Color(hex: 0x00B4DA)
     static let teal = Color(hex: 0x5EDFD0)
@@ -20,11 +21,11 @@ enum PK {
     static let orange = Color(hex: 0xFF7043)
     static let green = Color(hex: 0x28BF7D)
 
-    static let borderDefault = Color(red: 91 / 255, green: 60 / 255, blue: 196 / 255).opacity(0.16)
-    static let borderNormal = Color(red: 91 / 255, green: 60 / 255, blue: 196 / 255).opacity(0.22)
-    static let borderSelected = Color(red: 91 / 255, green: 60 / 255, blue: 196 / 255).opacity(0.32)
+    static let borderDefault = Color(light: 0x4C56C7, lightAlpha: 0.24, dark: 0x5B3CC4, darkAlpha: 0.16)
+    static let borderNormal = Color(light: 0x4C56C7, lightAlpha: 0.34, dark: 0x5B3CC4, darkAlpha: 0.22)
+    static let borderSelected = Color(light: 0x4C56C7, lightAlpha: 0.44, dark: 0x5B3CC4, darkAlpha: 0.32)
     static let borderActive = cyan.opacity(0.40)
-    static let divider = Color(red: 91 / 255, green: 60 / 255, blue: 196 / 255).opacity(0.12)
+    static let divider = Color(light: 0x4C56C7, lightAlpha: 0.18, dark: 0x5B3CC4, darkAlpha: 0.12)
 }
 
 extension Color {
@@ -34,6 +35,20 @@ extension Color {
             green: Double((hex >> 8) & 0xff) / 255,
             blue: Double(hex & 0xff) / 255
         )
+    }
+
+    /// Dynamic color resolving per-appearance, so PK.* constants adapt when theme changes.
+    init(light: UInt32, dark: UInt32) {
+        self.init(light: light, lightAlpha: 1, dark: dark, darkAlpha: 1)
+    }
+
+    /// Dynamic color with independent alpha per appearance, needed since a fixed opacity
+    /// reads very differently against a light vs. dark background.
+    init(light: UInt32, lightAlpha: Double, dark: UInt32, darkAlpha: Double) {
+        self.init(nsColor: NSColor(name: nil) { appearance in
+            let isDark = appearance.bestMatch(from: [.darkAqua, .aqua]) == .darkAqua
+            return NSColor(Color(hex: isDark ? dark : light).opacity(isDark ? darkAlpha : lightAlpha))
+        })
     }
 }
 
@@ -104,6 +119,33 @@ extension Text {
     }
 }
 
+extension View {
+    /// Shows the pointing-hand cursor while hovering, matching web-style button affordance.
+    @ViewBuilder
+    func pkPointerCursor(enabled: Bool = true) -> some View {
+        if enabled {
+            onHover { hovering in
+                if hovering {
+                    NSCursor.pointingHand.push()
+                } else {
+                    NSCursor.pop()
+                }
+            }
+        } else {
+            self
+        }
+    }
+}
+
+struct PKPlainButtonStyle: ButtonStyle {
+    @Environment(\.isEnabled) private var isEnabled
+
+    func makeBody(configuration: Configuration) -> some View {
+        configuration.label
+            .pkPointerCursor(enabled: isEnabled)
+    }
+}
+
 struct PKPrimaryButtonStyle: ButtonStyle {
     @Environment(\.isEnabled) private var isEnabled
 
@@ -117,6 +159,7 @@ struct PKPrimaryButtonStyle: ButtonStyle {
             .frame(maxWidth: .infinity, minHeight: 38)
             .background(backgroundColor(configuration: configuration), in: RoundedRectangle(cornerRadius: 6))
             .overlay(RoundedRectangle(cornerRadius: 6).stroke(isEnabled ? .clear : PK.borderNormal.opacity(0.8)))
+            .pkPointerCursor(enabled: isEnabled)
     }
 
     private func backgroundColor(configuration: Configuration) -> Color {

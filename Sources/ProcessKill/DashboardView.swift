@@ -4,21 +4,83 @@ struct DashboardView: View {
     @EnvironmentObject private var model: ProcessMonitor
     @State private var sidebarDragStartWidth: CGFloat?
     @State private var isCreatingGroup = false
+    @FocusState private var groupInputFocused: Bool
+    @FocusState private var renameGroupFocused: Bool
 
     var body: some View {
-        VStack(spacing: 0) {
-            titleBar
-            HStack(spacing: 0) {
-                sidebar
-                sidebarResizeHandle
-                Divider().overlay(PK.divider)
-                mainColumns
+        ZStack {
+            VStack(spacing: 0) {
+                titleBar
+                HStack(spacing: 0) {
+                    sidebar
+                    sidebarResizeHandle
+                    Divider().overlay(PK.divider)
+                    mainColumns
+                }
+            }
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
+            .background(PK.bgDeep2)
+            .task {
+                await model.scan()
+            }
+
+            if model.groupPendingDeletion != nil {
+                deleteGroupConfirmationOverlay
             }
         }
-        .frame(maxWidth: .infinity, maxHeight: .infinity)
-        .background(PK.bgDeep2)
-        .task {
-            await model.scan()
+    }
+
+    private var deleteGroupConfirmationOverlay: some View {
+        ZStack {
+            Color.black.opacity(0.45)
+                .ignoresSafeArea()
+                .onTapGesture {
+                    model.cancelDeleteGroup()
+                }
+
+            VStack(alignment: .leading, spacing: 14) {
+                Text("Delete Group")
+                    .pkFont(size: 14, weight: .bold)
+                    .foregroundStyle(PK.textPrimary)
+
+                if let groupName = model.groupPendingDeletion {
+                    let count = model.projectsInGroup(groupName).count
+                    Text("\"\(groupName)\" has \(count) project\(count == 1 ? "" : "s"). They will be moved to Ungrouped unless you choose to delete them below.")
+                        .pkFont(size: 11)
+                        .foregroundStyle(PK.textSecondary)
+                }
+
+                Toggle("Also delete these projects", isOn: $model.deleteProjectsWithGroup)
+                    .toggleStyle(.checkbox)
+                    .pkFont(size: 11)
+                    .foregroundStyle(PK.textPrimary)
+
+                HStack(spacing: 8) {
+                    Spacer()
+                    Button("Cancel") {
+                        model.cancelDeleteGroup()
+                    }
+                    .buttonStyle(PKPlainButtonStyle())
+                    .pkFont(size: 11, weight: .semibold)
+                    .foregroundStyle(PK.textSecondary)
+                    .padding(.horizontal, 12)
+                    .padding(.vertical, 6)
+
+                    Button("Delete Group") {
+                        model.confirmDeleteGroup()
+                    }
+                    .buttonStyle(PKPlainButtonStyle())
+                    .pkFont(size: 11, weight: .semibold)
+                    .foregroundStyle(.white)
+                    .padding(.horizontal, 12)
+                    .padding(.vertical, 6)
+                    .background(PK.red, in: RoundedRectangle(cornerRadius: 6))
+                }
+            }
+            .padding(18)
+            .frame(width: 320)
+            .background(PK.bgSection, in: RoundedRectangle(cornerRadius: 10))
+            .overlay(RoundedRectangle(cornerRadius: 10).stroke(PK.borderNormal))
         }
     }
 
@@ -35,10 +97,20 @@ struct DashboardView: View {
                 Text("⌕")
                     .pkFont(size: 13)
                     .foregroundStyle(PK.textMuted)
-                Text("Search projects, commands...")
+                TextField("Search projects, commands...", text: $model.searchText)
+                    .textFieldStyle(.plain)
                     .pkFont(size: 11)
-                    .foregroundStyle(PK.textMuted)
-                Spacer()
+                    .foregroundStyle(PK.textPrimary)
+                if !model.searchText.isEmpty {
+                    Button {
+                        model.searchText = ""
+                    } label: {
+                        Text("✕")
+                            .pkFont(size: 10)
+                            .foregroundStyle(PK.textMuted)
+                    }
+                    .buttonStyle(PKPlainButtonStyle())
+                }
             }
             .frame(maxWidth: 360)
             .padding(.horizontal, 10)
@@ -52,6 +124,7 @@ struct DashboardView: View {
         .frame(height: 44)
         .padding(.horizontal, 16)
         .background(PK.bgDeepest)
+        .background(TitleBarDragArea())
         .overlay(Rectangle().fill(PK.divider).frame(height: 1), alignment: .bottom)
     }
 
@@ -64,11 +137,13 @@ struct DashboardView: View {
                     Spacer()
                     Button("+ Group") {
                         isCreatingGroup.toggle()
-                        if !isCreatingGroup {
+                        if isCreatingGroup {
+                            groupInputFocused = true
+                        } else {
                             model.newGroupName = ""
                         }
                     }
-                    .buttonStyle(.plain)
+                    .buttonStyle(PKPlainButtonStyle())
                     .pkFont(size: 10, weight: .semibold)
                     .foregroundStyle(PK.textSecondary)
                     .padding(.horizontal, 8)
@@ -79,7 +154,7 @@ struct DashboardView: View {
                     Button("+ Add") {
                         model.addProjectFolder()
                     }
-                    .buttonStyle(.plain)
+                    .buttonStyle(PKPlainButtonStyle())
                     .pkFont(size: 10, weight: .semibold)
                     .foregroundStyle(PK.textSecondary)
                     .padding(.horizontal, 8)
@@ -101,6 +176,7 @@ struct DashboardView: View {
                             .padding(.vertical, 6)
                             .background(PK.bgSection, in: RoundedRectangle(cornerRadius: 5))
                             .overlay(RoundedRectangle(cornerRadius: 5).stroke(PK.borderNormal.opacity(0.75)))
+                            .focused($groupInputFocused)
                             .onSubmit {
                                 model.createGroup()
                                 isCreatingGroup = false
@@ -110,7 +186,7 @@ struct DashboardView: View {
                             model.createGroup()
                             isCreatingGroup = false
                         }
-                        .buttonStyle(.plain)
+                        .buttonStyle(PKPlainButtonStyle())
                         .pkFont(size: 10, weight: .semibold)
                         .foregroundStyle(PK.teal)
                         .padding(.horizontal, 8)
@@ -126,24 +202,73 @@ struct DashboardView: View {
                     LazyVStack(spacing: 8) {
                         ForEach(model.groupedProjects, id: \.name) { group in
                             VStack(spacing: 3) {
-                                Button {
-                                    model.toggleGroup(group.name)
-                                } label: {
-                                    HStack {
+                                if model.groupBeingRenamed == group.name {
+                                    HStack(spacing: 6) {
                                         Text(model.collapsedGroups.contains(group.name) ? "▸" : "▾")
                                             .pkFont(size: 10, weight: .semibold)
                                             .foregroundStyle(PK.textMuted)
-                                        Text(group.name)
-                                            .pkSectionLabel(size: 9)
-                                        Spacer()
-                                        Text("\(group.projects.count)")
-                                            .pkFont(size: 9, weight: .semibold, design: .monospaced)
-                                            .foregroundStyle(PK.textMuted)
+                                        TextField("Group name", text: $model.renameGroupText)
+                                            .textFieldStyle(.plain)
+                                            .pkFont(size: 11, weight: .semibold)
+                                            .foregroundStyle(PK.textPrimary)
+                                            .focused($renameGroupFocused)
+                                            .onSubmit {
+                                                model.confirmRenameGroup()
+                                            }
+                                        Button("Save") {
+                                            model.confirmRenameGroup()
+                                        }
+                                        .buttonStyle(PKPlainButtonStyle())
+                                        .pkFont(size: 9, weight: .semibold)
+                                        .foregroundStyle(PK.teal)
+                                        Button("Cancel") {
+                                            model.cancelRenameGroup()
+                                        }
+                                        .buttonStyle(PKPlainButtonStyle())
+                                        .pkFont(size: 9, weight: .semibold)
+                                        .foregroundStyle(PK.textMuted)
                                     }
                                     .padding(.horizontal, 4)
                                     .padding(.top, 3)
+                                } else {
+                                    Button {
+                                        model.toggleGroup(group.name)
+                                    } label: {
+                                        HStack {
+                                            Text(model.collapsedGroups.contains(group.name) ? "▸" : "▾")
+                                                .pkFont(size: 10, weight: .semibold)
+                                                .foregroundStyle(PK.textMuted)
+                                            Text(group.name)
+                                                .pkSectionLabel(size: 9)
+                                            Spacer()
+                                            Text("\(group.projects.count)")
+                                                .pkFont(size: 9, weight: .semibold, design: .monospaced)
+                                                .foregroundStyle(PK.textMuted)
+                                            if group.name != "Ungrouped" {
+                                                Menu {
+                                                    Button("Rename Group") {
+                                                        model.startRenamingGroup(group.name)
+                                                        renameGroupFocused = true
+                                                    }
+                                                    Divider()
+                                                    Button("Delete Group", role: .destructive) {
+                                                        model.requestDeleteGroup(group.name)
+                                                    }
+                                                } label: {
+                                                    Text("⋯")
+                                                        .pkFont(size: 11, weight: .semibold)
+                                                        .foregroundStyle(PK.textMuted)
+                                                }
+                                                .buttonStyle(PKPlainButtonStyle())
+                                                .menuIndicator(.hidden)
+                                                .fixedSize()
+                                            }
+                                        }
+                                        .padding(.horizontal, 4)
+                                        .padding(.top, 3)
+                                    }
+                                    .buttonStyle(PKPlainButtonStyle())
                                 }
-                                .buttonStyle(.plain)
 
                                 if !model.collapsedGroups.contains(group.name) {
                                     if group.projects.isEmpty {
@@ -415,7 +540,7 @@ struct DashboardView: View {
                 Button("Clear") {
                     model.clearLogs()
                 }
-                .buttonStyle(.plain)
+                .buttonStyle(PKPlainButtonStyle())
                 .pkFont(size: 10, weight: .semibold)
                 .foregroundStyle(PK.textMuted)
                 .disabled(model.commandLogs.isEmpty)
@@ -489,7 +614,7 @@ struct DashboardView: View {
                 Button("↗ Open localhost:\(model.port)") {
                     model.openLocalhost()
                 }
-                .buttonStyle(.plain)
+                .buttonStyle(PKPlainButtonStyle())
                 .pkFont(size: 11, weight: .medium)
                 .foregroundStyle(PK.cyan)
                 .frame(maxWidth: .infinity, alignment: .trailing)
@@ -607,10 +732,13 @@ private struct SidebarProjectRow: View {
                     }
                 } label: {
                     Text(isSelected ? "›" : "⋯")
-                        .pkFont(size: 14)
+                        .pkFont(size: 18, weight: .semibold)
                         .foregroundStyle(PK.textMuted)
+                        .frame(width: 26, height: 26)
+                        .contentShape(Rectangle())
                 }
-                .buttonStyle(.plain)
+                .buttonStyle(PKPlainButtonStyle())
+                .menuIndicator(.hidden)
             }
             .padding(.horizontal, 10)
             .padding(.vertical, 8)
@@ -618,7 +746,7 @@ private struct SidebarProjectRow: View {
             .background(isSelected ? PK.bgInput : .clear, in: RoundedRectangle(cornerRadius: 6))
             .contentShape(Rectangle())
         }
-        .buttonStyle(.plain)
+        .buttonStyle(PKPlainButtonStyle())
     }
 }
 
@@ -655,7 +783,7 @@ private struct RunningProcessRow: View {
                 }
                 .frame(maxWidth: .infinity, alignment: .leading)
             }
-            .buttonStyle(.plain)
+            .buttonStyle(PKPlainButtonStyle())
 
             Button(action: stop) {
                 Text("■")
@@ -665,7 +793,7 @@ private struct RunningProcessRow: View {
                     .padding(.vertical, 4)
                     .background(PK.red.opacity(0.10), in: RoundedRectangle(cornerRadius: 3))
             }
-            .buttonStyle(.plain)
+            .buttonStyle(PKPlainButtonStyle())
         }
         .padding(.horizontal, 10)
         .padding(.vertical, 8)
@@ -753,13 +881,13 @@ private struct DashboardCommandRow: View {
                     }
                 }
             }
-            .buttonStyle(.plain)
+            .buttonStyle(PKPlainButtonStyle())
 
             if command.isManual {
                 Button("−") {
                     remove()
                 }
-                .buttonStyle(.plain)
+                .buttonStyle(PKPlainButtonStyle())
                 .pkFont(size: 11, weight: .bold)
                 .foregroundStyle(PK.red)
                 .padding(.trailing, 8)
@@ -777,7 +905,7 @@ private struct AddCustomCommandRow: View {
             Button("+ Add custom command") {
                 isExpanded.toggle()
             }
-            .buttonStyle(.plain)
+            .buttonStyle(PKPlainButtonStyle())
             .pkFont(size: 11)
             .foregroundStyle(PK.purple)
 

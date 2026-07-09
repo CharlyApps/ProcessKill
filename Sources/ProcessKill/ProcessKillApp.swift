@@ -5,14 +5,20 @@ import SwiftUI
 struct ProcessKillApp: App {
     @StateObject private var model = ProcessMonitor()
     @AppStorage("fontScale") private var fontScale = 1.0
+    @AppStorage("appTheme") private var theme = AppTheme.system
 
     var body: some Scene {
         WindowGroup {
             DashboardView()
                 .environmentObject(model)
                 .environment(\.pkFontScale, CGFloat(fontScale))
+                .preferredColorScheme(theme.colorScheme)
                 .frame(minWidth: 980, idealWidth: 1280, minHeight: 680, idealHeight: 780)
                 .background(WindowAccessor())
+                .onAppear {
+                    NSApp.setActivationPolicy(.regular)
+                    NSApp.activate(ignoringOtherApps: true)
+                }
         }
         .windowStyle(.hiddenTitleBar)
         .commands {
@@ -39,14 +45,16 @@ struct ProcessKillApp: App {
             CompactView()
                 .environmentObject(model)
                 .environment(\.pkFontScale, CGFloat(fontScale))
+                .preferredColorScheme(theme.colorScheme)
                 .frame(width: 480, height: 520)
                 .background(PK.bgDeepest)
         }
         .menuBarExtraStyle(.window)
 
         Settings {
-            PreferencesView(fontScale: $fontScale)
+            PreferencesView(fontScale: $fontScale, theme: $theme)
                 .environment(\.pkFontScale, CGFloat(fontScale))
+                .preferredColorScheme(theme.colorScheme)
         }
     }
 
@@ -61,7 +69,7 @@ private struct WindowAccessor: NSViewRepresentable {
         DispatchQueue.main.async {
             guard let window = view.window else { return }
             window.title = "ProcessKill"
-            window.isMovableByWindowBackground = true
+            window.isMovableByWindowBackground = false
             window.titlebarAppearsTransparent = true
             window.backgroundColor = .windowBackgroundColor
         }
@@ -69,4 +77,18 @@ private struct WindowAccessor: NSViewRepresentable {
     }
 
     func updateNSView(_ nsView: NSView, context: Context) {}
+}
+
+struct TitleBarDragArea: NSViewRepresentable {
+    func makeNSView(context: Context) -> DraggableView {
+        DraggableView()
+    }
+
+    func updateNSView(_ nsView: DraggableView, context: Context) {}
+}
+
+final class DraggableView: NSView {
+    override func mouseDown(with event: NSEvent) {
+        window?.performDrag(with: event)
+    }
 }

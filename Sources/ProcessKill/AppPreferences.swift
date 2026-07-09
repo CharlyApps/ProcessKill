@@ -29,13 +29,49 @@ extension View {
     }
 }
 
+enum AppTheme: String, CaseIterable {
+    case system
+    case light
+    case dark
+
+    var label: String {
+        switch self {
+        case .system: "System"
+        case .light: "Light"
+        case .dark: "Dark"
+        }
+    }
+
+    var colorScheme: ColorScheme? {
+        switch self {
+        case .system: nil
+        case .light: .light
+        case .dark: .dark
+        }
+    }
+}
+
 struct PreferencesView: View {
     @Binding var fontScale: Double
+    @Binding var theme: AppTheme
 
     var body: some View {
         VStack(alignment: .leading, spacing: 18) {
             Text("Preferences")
                 .pkFont(size: 22, weight: .bold)
+
+            VStack(alignment: .leading, spacing: 10) {
+                Text("Theme")
+                    .pkFont(size: 13, weight: .semibold)
+
+                Picker("Theme", selection: $theme) {
+                    ForEach(AppTheme.allCases, id: \.self) { option in
+                        Text(option.label).tag(option)
+                    }
+                }
+                .pickerStyle(.segmented)
+                .labelsHidden()
+            }
 
             VStack(alignment: .leading, spacing: 10) {
                 HStack {
